@@ -51,6 +51,7 @@ module.exports = {
   modules: [
     // Doc: https://axios.nuxtjs.org/usage
     '@nuxtjs/axios',
+    '@nuxtjs/auth',
   ],
   /*
   ** Axios module configuration
@@ -58,6 +59,53 @@ module.exports = {
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
   },
+
+  auth: {
+    defaultStrategy: 'refresh',
+    strategies: {
+      refresh: {
+        _scheme: '~/auth/schemes/refresh.js',
+        endpoints: {
+          login: {
+            url: env.apiBaseUrl + '/api/v1/login',
+            method: 'post',
+            propertyName: 'data.tokens.accessToken'
+          },
+          logout: false,
+          user: {
+            url: env.apiBaseUrl + '/api/v1/user/profile',
+            method: 'get',
+            propertyName: 'data'
+          },
+          refresh: {
+            url: env.apiBaseUrl + '/api/v1/refresh',
+            method: 'get',
+            propertyName: 'data'
+          }
+        },
+      }
+    },
+    redirect: {
+      login: '/adminLogin',
+      logout: false,
+      home: '/'
+    },
+    cookie: {
+      name: 'token',
+      options: {
+        path: '/',
+        domain: env.cookieDomain
+      }
+    },
+    token: {
+      prefix: 'token.'
+    },
+    refresh_token: {
+      prefix: 'refresh_token.'
+    },
+    localStorage: false
+  },
+
 
   /*
   ** Build configuration

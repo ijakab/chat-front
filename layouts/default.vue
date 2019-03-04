@@ -1,12 +1,12 @@
 <template>
-  <v-app dark>
+  <v-app light>
     <v-content>
       <v-container>
         <nuxt />
       </v-container>
     </v-content>
     <v-footer
-      :fixed="fixed"
+      :fixed="true"
       app
     >
       <span>&copy; 2019</span>
