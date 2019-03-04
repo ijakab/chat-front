@@ -1,0 +1,323 @@
+$font_primary_dark: $primary_color_dark;
+$font_primary_light: $primary_color_light;
+$font_primary_hover: $primary_active_color;
+
+// Important: USE HELPERS ONLY WHEN U ARE SURE THAT U DO NOT HAVE TO REPLACE THEM INSIDE CSS ITSELF
+
+// Text Helpers
+
+.text--align-left {
+  text-align: left !important;
+}
+
+.text--align-right {
+  text-align: right !important;
+}
+
+.text--align-center {
+  text-align: center !important;
+}
+
+// Click Helpers
+
+.link_disabled {
+  opacity: .5 !important;
+  cursor: not-allowed !important;
+}
+
+.click {
+  cursor: pointer !important;
+}
+
+.click_link {
+  @include transition(0.2s linear !important);
+}
+
+.click_link--color-dark {
+  color: $font_primary_dark;
+
+  &:hover {
+    color: $font_primary_light !important;
+  }
+}
+
+.click_link--color-light {
+  color: $font_primary_light;
+
+  &:hover {
+    color: $font_primary_hover !important;
+  }
+}
+
+.click--disabled {
+  pointer-events: none !important;
+}
+
+.click--not-allowed {
+  cursor: not-allowed !important;
+}
+
+// Padding Helpers
+
+.padding_reset--all {
+  padding: 0 !important;
+}
+
+.padding_reset--top {
+  padding-top: 0 !important;
+}
+
+.padding_reset--right {
+  padding-right: 0 !important;
+}
+
+.padding_reset--bottom {
+  padding-bottom: 0 !important;
+}
+
+.padding_reset--left {
+  padding-left: 0 !important;
+}
+
+//Width Helpers
+.w50 {
+  width: 50%;
+}
+
+// Margin Helpers
+
+.margin_reset--all {
+  margin: 0 !important;
+}
+
+.margin_reset--top {
+  margin-top: 0 !important;
+}
+
+.margin_reset--right {
+  margin-right: 0 !important;
+}
+
+.margin_reset--bottom {
+  margin-bottom: 0 !important;
+}
+
+.margin_reset--left {
+  margin-left: 0 !important;
+}
+
+.margin_add--top-0-half {
+  margin-top: .5rem !important;
+  ;
+}
+
+.margin_add--top-1 {
+  margin-top: 1rem !important;
+  ;
+}
+
+.margin_add--top-2 {
+  margin-top: 2rem !important;
+  ;
+}
+
+.margin_add--top-3 {
+  margin-top: 3rem !important;
+  ;
+}
+
+.margin_add--top-4 {
+  margin-top: 4rem !important;
+}
+
+.margin_add--right-1 {
+  margin-right: 1rem !important;
+  ;
+}
+
+.margin_add--right-2 {
+  margin-right: 2rem !important;
+  ;
+}
+
+.margin_add--right-3 {
+  margin-right: 3rem !important;
+  ;
+}
+
+.margin_add--right-4 {
+  margin-right: 4rem !important;
+  ;
+}
+
+.margin_add--bottom-1 {
+  margin-bottom: 1rem !important;
+  ;
+}
+
+.margin_add--bottom-2 {
+  margin-bottom: 2rem !important;
+  ;
+}
+
+.margin_add--bottom-3 {
+  margin-bottom: 3rem !important;
+  ;
+}
+
+.margin_add--bottom-4 {
+  margin-bottom: 4rem !important;
+  ;
+}
+
+.margin_add--left-1 {
+  margin-left: 1rem !important;
+  ;
+}
+
+.margin_add--left-2 {
+  margin-left: 2rem !important;
+  ;
+}
+
+.margin_add--left-3 {
+  margin-left: 3rem !important;
+  ;
+}
+
+.margin_add--left-4 {
+  margin-left: 4rem !important;
+  ;
+}
+
+// Text Overflow Helpers
+
+.text_overflow {
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+}
+
+.text_overflow--reset {
+  white-space: initial !important;
+}
+
+// Overflow Helpers
+
+.overflow--disable {
+  overflow: hidden !important;
+}
+
+// Hide Helpers
+
+.element--hide {
+  display: none !important;
+}
+
+// Image Helpers
+
+.img--full {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.img--objectFit-contain {
+  object-fit: contain !important;
+}
+
+.img--objectFit-cover {
+  object-fit: cover !important;
+}
+
+// Float Helpers
+.float--left {
+  float: left !important;
+}
+
+.float--right {
+  float: right !important;
+}
+
+.float--reset {
+  float: initial !important;
+}
+
+// Word Break
+.word--break-all {
+  word-break: break-all !important;
+}
+
+// Display Helpers
+.display--block {
+  display: block !important;
+}
+
+// Display Helpers
+.display--inlineBlock {
+  display: inline-block !important;
+}
+
+// Clearfix Helpers
+.clearfix {
+  @include cf;
+}
+
+// Fake hide element
+.hide_element--fake {
+  opacity: 0 !important;
+}
+
+// Text Transform
+.text--capitalize {
+  text-transform: capitalize !important;
+}
+
+// Position Helpers
+.position--relative {
+  position: relative !important;
+}
+
+
+//Responsive SHOW/HIDE
+.tablet-show {
+  display: none;
+
+  @include tablets {
+    display: block;
+  }
+}
+
+.tablet-hide {
+  @include tablets {
+    display: none;
+  }
+}
+
+.phone-show {
+  display: none !important;
+
+  @include portretphones {
+    display: block !important;
+  }
+}
+
+.phone-hide {
+  @include portretphones {
+    display: none;
+  }
+}
+
+//Colors
+.blue {
+  color: $primary_active_color;
+}
+
+.btn {
+  display: inline-block;
+  height: 4rem;
+  line-height: 4rem;
+  padding: 0 2rem;
+  background: $primary_active_color;
+  color: #fff;
+  text-transform: uppercase;
+}

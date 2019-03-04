@@ -1,0 +1,162 @@
+@mixin border-radius($border-radius) {
+  -webkit-border-radius: $border-radius;
+  -moz-border-radius: $border-radius;
+  border-radius: $border-radius;
+}
+
+@mixin transform($transform) {
+  -webkit-transform: $transform;
+  -moz-transform: $transform;
+  -ms-transform: $transform;
+  -o-transform: $transform;
+  transform: $transform;
+}
+
+@mixin animation($animation){
+  -webkit-animation: $animation;
+  -o-animation: $animation;
+  animation: $animation;
+}
+
+@mixin appearance($appearance){
+  -webkit-appearance: $appearance;
+  -moz-appearance: $appearance;
+  appearance: $appearance;
+}
+
+@mixin transformOrigin($origin) {
+  -webkit-transform-origin: $origin;
+  -moz-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  -o-transform-origin: $origin;
+  transform-origin: $origin;
+}
+
+@mixin transition($transition) {
+  -webkit-transition: $transition;
+  -moz-transition: $transition;
+  -ms-transition: $transition;
+  -o-transition: $transition;
+  transition: $transition;
+}
+
+@mixin transitionDuration($duration) {
+  -webkit-transition-duration: $duration;
+  -moz-transition-duration: $duration;
+  -ms-transition-duration: $duration;
+  -o-transition-duration: $duration;
+  transition-duration: $duration;
+}
+
+@mixin transitionProperty($property) {
+  -webkit-transition-property: $property;
+  -moz-transition-property: $property;
+  -ms-transition-property: $property;
+  -o-transition-property: $property;
+  transition-property: $property;
+}
+
+@mixin box-shadow($box-shadow) {
+  -webkit-box-shadow: $box-shadow;
+  -moz-box-shadow: $box-shadow;
+  box-shadow: $box-shadow;
+}
+
+@mixin fullscreen($position: relative, $top: initial, $right: initial, $bottom: initial, $left: initial){
+  position: $position;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+
+@mixin fontSmoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Font Weight Mixins by name
+@mixin fontThin{
+  font-weight: 100;
+}
+
+@mixin fontExtraLight{
+  font-weight: 200;
+}
+
+@mixin fontLight{
+  font-weight: 300;
+}
+
+@mixin fontRegular{
+  font-weight: 400;
+}
+
+@mixin fontMedium{
+  font-weight: 500;
+}
+@mixin fontSemiBold{
+  font-weight: 600;
+}
+
+@mixin fontBold{
+  font-weight: 700;
+}
+
+@mixin fontExtraBold{
+  font-weight: 800;
+}
+
+@mixin fontBlack{
+  font-weight: 900;
+}
+
+// Clearfix
+@mixin cf {
+  clear: both;
+  &::after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+// Gradient Mixins
+
+@mixin gradientTopToBottom($top, $bottom){
+  background: $top; /* Old browsers */
+  background: -moz-linear-gradient(top, $top 0%, $bottom 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, $top 0%,$bottom 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, $top 0%,$bottom 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$top', endColorstr='$bottom',GradientType=0 ); /* IE6-9 */
+}
+
+@mixin gradientLeftToRigght($left, $right){
+  background: $left; /* Old browsers */
+  background: -moz-linear-gradient(top, $left 0%, $right 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, $left 0%,$right 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to right, $left 0%,$right 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$left', endColorstr='$right',GradientType=0 ); /* IE6-9 */
+}
+
+@mixin positionSticky{
+  position: sticky;
+  position: -webkit-sticky;
+}
+
+//Responsive mixins
+@mixin lowresmonitors{
+  @media screen and (max-width: 1270px){ @content;}
+}
+
+@mixin tablets{
+  @media screen and (max-width: 991px){ @content; }
+}
+
+@mixin phones{
+  @media screen and (max-width: 768px){ @content; }
+}
+
+@mixin portretphones{
+  @media screen and (max-width: 576px){ @content; }
+}
