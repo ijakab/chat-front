@@ -1,6 +1,5 @@
 import env from './env'
 const pkg = require('./package')
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
 
 module.exports = {
   mode: 'universal',
@@ -34,14 +33,12 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '~/assets/style/app.styl'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '@/plugins/vuetify'
   ],
 
   /*
@@ -110,12 +107,8 @@ module.exports = {
   ** Build configuration
   */
   build: {
-    transpile: ['vuetify/lib'],
-    plugins: [new VuetifyLoaderPlugin()],
+    transpile: [],
     loaders: {
-      stylus: {
-        import: ["~assets/style/variables.styl"]
-      }
     },
     
     /*

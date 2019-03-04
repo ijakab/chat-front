@@ -60,7 +60,6 @@
             }});
 
         } catch (e) {
-          console.log('error se dogodio', e);
           if (e.response && e.response.data) {
             Toast.fire({
               type: 'error',
