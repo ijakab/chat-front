@@ -4,7 +4,7 @@
       <div class="premade_login--logo">
         <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Archlinux-icon-crystal-64.svg" alt="">
       </div>
-      <form class="display_flex display_flex--alignItems-center" @submit.prevent="login">
+      <form class="display_flex display_flex--alignItems-center" v-on:submit.prevent="login">
         <div>
           <div class="premade_login_box--item">
             <label for="email" class="premade_label">Username:</label>
@@ -48,9 +48,14 @@
       }
     },
 
+    mounted() {
+      console.log('Ovjde sam')
+    },
+
     methods: {
       async login () {
         try {
+          console.log('logira se');
           await this.$auth.loginWith('refresh', {data: {
               username: this.username,
               password: this.password,

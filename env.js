@@ -4,7 +4,7 @@ module.exports = {
     hostName: 'https://localhost:3000',
     isProduction: false,
     isProtected: false,
-
+    subdomain: 'gaussdev',
     apiBaseUrl: 'https://apigaussbox.jsteam.gaussx.com',
   },
 
