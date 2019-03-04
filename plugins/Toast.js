@@ -1,8 +1,10 @@
 import Swal from 'sweetalert2'
 
-export default Swal.mixin({
+let mixin =  Swal.mixin({
   toast: true,
   position: 'top-end',
   showConfirmButton: false,
   timer: 3000
 });
+
+export default mixin

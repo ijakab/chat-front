@@ -1,5 +1,5 @@
-module.exports = {
-  env:{
+export default {
+  env: {
     cookieDomain: 'localhost',
     hostName: 'https://localhost:3000',
     isProduction: false,

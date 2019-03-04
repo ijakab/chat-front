@@ -40,7 +40,6 @@ export default class RefreshScheme {
 
     // Ditch any leftover local tokens before attempting to log in
     await this._logoutLocally()
-
     const _endpoint =
       typeof defaults === 'object'
         ? Object.assign({}, defaults, endpoint)
@@ -49,7 +48,6 @@ export default class RefreshScheme {
     let data = (await this.$auth.ctx.app.$axios.request(_endpoint)).data.data
 
     let {accessToken, refreshToken} = data.tokens
-
     await this.$auth.setToken(this.name, accessToken)
     await this.$auth.setRefreshToken(this.name, refreshToken)
 

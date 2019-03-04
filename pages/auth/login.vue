@@ -38,6 +38,7 @@
 
 <script>
   import Toast from '@/plugins/Toast'
+  import env from '~/env'
 
   export default {
 
@@ -48,29 +49,24 @@
       }
     },
 
-    mounted() {
-      console.log('Ovjde sam')
-    },
-
     methods: {
       async login () {
+        console.log(env);
         try {
-          console.log('logira se');
           await this.$auth.loginWith('refresh', {data: {
               username: this.username,
               password: this.password,
-              subdomain: process.env.subdomain,
+              subdomain: env.env.subdomain,
             }});
 
         } catch (e) {
+          console.log('error se dogodio', e);
           if (e.response && e.response.data) {
-            Toast({
+            Toast.fire({
               type: 'error',
               title: e.response.data.message
             })
           }
-
-          throw e
         }
       }
 

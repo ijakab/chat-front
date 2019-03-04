@@ -66,18 +66,18 @@ module.exports = {
         _scheme: '~/auth/schemes/refresh.js',
         endpoints: {
           login: {
-            url: env.apiBaseUrl + '/api/v1/login',
+            url: env.env.apiBaseUrl + '/api/v1/login',
             method: 'post',
             propertyName: 'data.tokens.accessToken'
           },
           logout: false,
           user: {
-            url: env.apiBaseUrl + '/api/v1/user/profile',
+            url: env.env.apiBaseUrl + '/api/v1/user/profile',
             method: 'get',
             propertyName: 'data'
           },
           refresh: {
-            url: env.apiBaseUrl + '/api/v1/refresh',
+            url: env.env.apiBaseUrl + '/api/v1/refresh',
             method: 'get',
             propertyName: 'data'
           }
@@ -93,7 +93,7 @@ module.exports = {
       name: 'token',
       options: {
         path: '/',
-        domain: env.cookieDomain
+        domain: env.env.cookieDomain
       }
     },
     token: {
