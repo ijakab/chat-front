@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <nuxt />
     <footer>
       <span>&copy; 2019</span>
