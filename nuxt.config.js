@@ -82,7 +82,7 @@ module.exports = {
       }
     },
     redirect: {
-      login: '/adminLogin',
+      login: '/login',
       logout: false,
       home: '/'
     },
