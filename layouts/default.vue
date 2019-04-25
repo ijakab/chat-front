@@ -9,8 +9,13 @@
 
 <script>
   export default {
-    mounted() {
-      console.log('adonisws je', this.$adonisWs);
+    async mounted() {
+      await new Promise(resolve => {
+        setTimeout(function () {
+          console.log('plugin 2');
+          resolve()
+        }, 2000)
+      })
     }
   }
 </script>

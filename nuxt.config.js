@@ -9,9 +9,6 @@ module.exports = {
   */
   head: {
     title: pkg.name,
-    script: [
-      { src: '@/static/scripts/adonis-ws.js' }
-    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -38,6 +35,10 @@ module.exports = {
   */
   css: [
     '@/static/styles/bootstrap'
+  ],
+
+  script:[
+    {src:'~/static/scripts/adonis-ws.js', type: 'text/javascript'}
   ],
 
   /*

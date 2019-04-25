@@ -6,9 +6,11 @@ const socketUrl = env.env.socketUrl
 const adonisWs = function (Vue) {
   if(!socketUrl) return
 
-  Vue.prototype.$adonisWs = ws(socketUrl, {
+  let adonisWs = ws(socketUrl, {
     path: 'gbox-ws'
   })
+
+  Vue.prototype.$adonisWs = adonisWs
 
   Vue.prototype.$adonisWs.awaitClose = function () {
     return new Promise((resolve, reject) => {
@@ -22,6 +24,7 @@ const adonisWs = function (Vue) {
       }, 200)
     })
   }
+
 }
 
 Vue.use(adonisWs)
