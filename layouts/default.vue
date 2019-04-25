@@ -9,13 +9,13 @@
 
 <script>
   export default {
-    async mounted() {
-      await new Promise(resolve => {
-        setTimeout(function () {
-          console.log('plugin 2');
-          resolve()
-        }, 2000)
-      })
+    mounted() {
+      //this.$adonisWs.connect()
+      if(process.browser) {
+        this.$adonisWs.on('open', () => {
+          console.log('opened');
+        })
+      }
     }
   }
 </script>

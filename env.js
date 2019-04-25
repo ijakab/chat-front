@@ -1,13 +1,13 @@
 export default {
   env: {
     cookieDomain: 'localhost',
-    hostName: 'https://localhost:3000',
+    hostName: 'http://localhost:3000',
     isProduction: false,
     isProtected: false,
     subdomain: 'gaussdev',
     apiBaseUrl: 'https://apigaussbox.jsteam.gaussx.com',
     socketApiBaseUrl: 'https://apigaussbox.jsteam.gaussx.com/v1/chat/',
-    socketUrl: 'wss://localhost:3333/',
+    socketUrl: 'ws://localhost:3333/',
   },
 
   server: {

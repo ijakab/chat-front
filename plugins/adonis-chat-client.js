@@ -1,12 +1,13 @@
 import Vue from 'vue'
-import ws from '@adonisjs/websocket-client'
+import Ws from '@adonisjs/websocket-client'
 import env from '~/env.js'
+
 const socketUrl = env.env.socketUrl
 
 const adonisWs = function (Vue) {
   if(!socketUrl) return
 
-  let adonisWs = ws(socketUrl, {
+  let adonisWs = Ws(socketUrl, {
     path: 'gbox-ws'
   })
 
