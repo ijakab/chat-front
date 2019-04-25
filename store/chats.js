@@ -5,7 +5,8 @@ export const state = () => ({
 });
 
 export const mutations = {
-  newPage(state, posts, firstCall) {if (firstCall) {
+  newPage(state, posts, firstCall) {
+    if (firstCall) {
       state.data = posts
     } else {
       state.data.push(...posts)

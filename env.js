@@ -6,7 +6,8 @@ export default {
     isProtected: false,
     subdomain: 'gaussdev',
     apiBaseUrl: 'https://apigaussbox.jsteam.gaussx.com',
-    socketApiBaseUrl: 'https://apigaussbox.jsteam.gaussx.com/v1/chat/'
+    socketApiBaseUrl: 'https://apigaussbox.jsteam.gaussx.com/v1/chat/',
+    socketUrl: 'wss://localhost:3333/',
   },
 
   server: {

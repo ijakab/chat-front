@@ -9,6 +9,9 @@ module.exports = {
   */
   head: {
     title: pkg.name,
+    script: [
+      { src: '@/static/scripts/adonis-ws.js' }
+    ],
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -34,13 +37,14 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '@/static/bootstrap'
+    '@/static/styles/bootstrap'
   ],
 
   /*
   ** Plugins to load before mounting the App
   */
   plugins: [
+    {src: '~/plugins/adonis-chat-client.js', ssr: false},
     '~/plugins/httpClient'
   ],
 
@@ -113,7 +117,7 @@ module.exports = {
     transpile: [],
     loaders: {
     },
-    
+
     /*
     ** You can extend webpack config here
     */

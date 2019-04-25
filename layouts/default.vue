@@ -6,3 +6,11 @@
     </footer>
   </div>
 </template>
+
+<script>
+  export default {
+    mounted() {
+      console.log('adonisws je', this.$adonisWs);
+    }
+  }
+</script>
