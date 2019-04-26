@@ -1,5 +1,6 @@
 <template>
   <div class="container">
+    <Header></Header>
     <nuxt v-if="displayChat" />
     <div v-if="!displayChat">
       Loading...
@@ -11,7 +12,13 @@
 </template>
 
 <script>
+  import Header from '~/components/Header'
+
   export default {
+    components: {
+      Header
+    },
+
     computed: {
       displayChat() {
         return this.$store.state.general.isLoaded

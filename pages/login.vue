@@ -36,14 +36,14 @@
     methods: {
       async login() {
         try {
-          await this.$auth.loginWith('refresh', {
+          let res = await this.$auth.loginWith('refresh', {
             data: {
               username: this.username,
               password: this.password,
               subdomain: env.env.subdomain,
             }
           });
-
+          this.$store.commit('user/setUser', res)
         } catch (e) {
           if (e.response && e.response.data) {
             Toast.fire({
