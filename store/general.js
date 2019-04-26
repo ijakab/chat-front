@@ -1,27 +1,14 @@
 export const state = () => ({
+  isLoaded: false,
   data: [],
   lastId: 1,
   perPage: 5
 });
 
 export const mutations = {
-  newPage(state, posts, firstCall) {
-    if (firstCall) {
-      state.data = posts
-    } else {
-      state.data.push(...posts)
-    }
-    if (!posts.length) {
-      state.lastId = 0
-      return
-    }
-    state.lastId = posts[posts.length - 1].id
+  setReady(state) {
+    state.isLoaded = true
   },
-
-  removeItem(state, id) {
-    let index = state.data.findIndex(post => post.id === id)
-    state.data.splice(index, 1)
-  }
 };
 
 export const actions = {

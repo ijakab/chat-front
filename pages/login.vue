@@ -24,6 +24,8 @@
 
   export default {
 
+    layout: 'anonymous',
+
     data() {
       return {
         username: '',

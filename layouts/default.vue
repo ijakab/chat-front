@@ -1,6 +1,9 @@
 <template>
   <div class="container">
-    <nuxt />
+    <nuxt v-if="displayChat" />
+    <div v-if="!displayChat">
+      Loading...
+    </div>
     <footer>
       <span>&copy; 2019</span>
     </footer>
@@ -9,11 +12,18 @@
 
 <script>
   export default {
+    computed: {
+      displayChat() {
+        return this.$store.state.general.isLoaded
+      }
+    },
+
     mounted() {
       //this.$adonisWs.connect()
       if(process.browser) {
+        this.$adonisWs.connect()
         this.$adonisWs.on('open', () => {
-          console.log('opened');
+          this.$store.commit('general/setReady')
         })
       }
     }
