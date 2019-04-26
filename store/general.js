@@ -1,8 +1,5 @@
 export const state = () => ({
   isLoaded: false,
-  data: [],
-  lastId: 1,
-  perPage: 5
 });
 
 export const mutations = {

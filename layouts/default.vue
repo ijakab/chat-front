@@ -28,9 +28,14 @@
     mounted() {
       //this.$adonisWs.connect()
       if(process.browser) {
-        this.$adonisWs.connect()
+        let jwt = this.$auth.$state['token.refresh']
+        this.$adonisWs.withJwtToken(jwt).connect()
         this.$adonisWs.on('open', () => {
-          this.$store.commit('general/setReady')
+          const userChannel = this.$adonisWs.subscribe(`BOUser:${this.$auth.user.id}`)
+          userChannel.on('ready', () => {
+            this.$adonisWs.userChannel = this.$adonisWs.getSubscription(`BOUser:${this.$auth.user.id}`)
+            this.$store.commit('general/setReady')
+          })
         })
       }
     }
