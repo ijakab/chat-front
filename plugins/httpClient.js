@@ -48,7 +48,7 @@ class HttpClient {
       if(this._jwt) this._headers['accessToken'] = this._jwt
       let response = await this.axios({
         method: this._method,
-        url: env.env.apiSocketBase + this.url,
+        url: env.env.socketApiBaseUrl + this.url,
         data: this._body,
         params: this._queryParams,
         headers: this._headers
@@ -67,7 +67,7 @@ class HttpClient {
 
   _logRequest(method, response) {
     console[method] (`${method} calling API!!!'
-            Route: ${this._method}, ${env.apiBase + this.url}
+            Route: ${this._method}, ${env.env.socketApiBaseUrl + this.url}
             Query params %o'
             Payload: %o
             Headers: %o'
