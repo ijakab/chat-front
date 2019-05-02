@@ -21,8 +21,11 @@ module.exports = {
         href:
           'https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons'
       },
-      {}
-    ]
+    ],
+    script: [
+      {src: 'https://code.jquery.com/jquery-3.3.1.slim.min.js'},
+      {src: 'https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js'},
+    ],
   },
 
   /*
@@ -35,10 +38,6 @@ module.exports = {
   */
   css: [
     '@/static/styles/bootstrap'
-  ],
-
-  script:[
-    {src:'~/static/scripts/adonis-ws.js', type: 'text/javascript'}
   ],
 
   /*

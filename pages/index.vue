@@ -1,11 +1,17 @@
 <template>
   <div>
-    Ovo je chat
+    <chat-list></chat-list>
   </div>
 </template>
 
 <script>
+  import ChatList from '~/components/ChatList'
+
   export default {
+    components: {
+      ChatList
+    },
+
     middleware: ['auth'],
 
     async asyncData({app}) {
