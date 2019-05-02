@@ -12,11 +12,18 @@
           <form>
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Title:</label>
-              <input type="text" class="form-control" id="recipient-name">
+              <input type="text" class="form-control" id="recipient-name" v-model="title">
             </div>
             <div class="form-group">
               <label for="message-text" class="col-form-label">Users:</label>
-              <textarea class="form-control" id="message-text" v-on:keyup="searchUsers"></textarea>
+              <input type="text" class="form-control" id="message-text" v-on:keyup="searchUsers" v-model="searchText" />
+            </div>
+            <a href="#" v-for="user in selectedUsers" :key="user.id" v-on:click="unselectUser(user)" class="badge badge-primary">{{user.details.displayName}}</a>
+            <div class="list-group" >
+              <a href="#" class="list-group-item list-group-item-action" v-for="user in foundUsers" :key="user.id" v-on:click="selectUser(user)" v-if="!selectedUsers.find(selectedUser => selectedUser.id === user.id)">
+                <img width="20" height="20" v-if="user.details.profileImage" v-bind:src="apiBase + '/' + user.details.profileImage.path">
+                {{user.details.displayName}}
+              </a>
             </div>
           </form>
         </div>
@@ -31,19 +38,38 @@
 
 <script>
   import _ from 'lodash'
+  import env from '~/env'
 
-  export default  {
-    methods: {
-      searchUsers: _.debounce(() => {
-        console.log('vid ga');
-      }, 300)
+  export default {
+    data: () => {
+      return {
+        searchText: '',
+        foundUsers: [],
+        selectedUsers: [],
+        apiBase: env.env.apiBaseUrl,
+        title: ''
+      }
     },
 
-    mounted() {
-      this.debounced = _.debounce(this.searchUsers, 300, {
-        'leading': true,
-        'trailing': false
-      })
-    }
+    methods: {
+      searchUsers: _.debounce(async function (){
+        let res = await this.$axios.post('/api/v1/user/filter', {
+          keywords: this.searchText
+        })
+        this.foundUsers = res.data.data.records
+        console.log(this.foundUsers);
+      }, 300),
+
+      selectUser(user) {
+        this.selectedUsers.push(user)
+      },
+
+      unselectUser(user) {
+        let index = this.selectedUsers.indexOf(user)
+        if(index !== -1) {
+          this.selectedUsers.splice(index, 1)
+        }
+      }
+    },
   }
 </script>
