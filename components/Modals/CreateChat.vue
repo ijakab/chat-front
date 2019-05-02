@@ -29,7 +29,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Create</button>
+          <button type="button" class="btn btn-primary" v-on:click="createChat">Create</button>
         </div>
       </div>
     </div>
@@ -57,7 +57,6 @@
           keywords: this.searchText
         })
         this.foundUsers = res.data.data.records
-        console.log(this.foundUsers);
       }, 300),
 
       selectUser(user) {
@@ -69,6 +68,14 @@
         if(index !== -1) {
           this.selectedUsers.splice(index, 1)
         }
+      },
+
+      createChat() {
+        let userIds = this.selectedUsers.map(user => user.id)
+        this.$adonisWs.userChannel.emit('createChat', {
+          userIds,
+          title: this.title
+        })
       }
     },
   }
