@@ -1,5 +1,6 @@
 import env from './env'
 const pkg = require('./package')
+import webpack from 'webpack'
 
 module.exports = {
   mode: 'universal',
