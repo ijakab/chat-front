@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <chat-list class="col-3"></chat-list>
+    <chat-lcist class="col-3"></chat-lcist>
     <div class="col-9">kls</div>
   </div>
 </template>
@@ -15,9 +15,12 @@
 
     middleware: ['auth'],
 
+    mounted() {
+      console.log(this.$store.state);
+    },
+
     async asyncData({app}) {
-      let res = await app.$socketRequestService.get('user/chats')
-      console.log(res);
+      await app.store.dispatch('chats/getMyChats')
     }
   }
 </script>
