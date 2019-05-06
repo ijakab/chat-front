@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <chat-lcist class="col-3"></chat-lcist>
+    <chat-list class="col-3"></chat-list>
     <div class="col-9">kls</div>
   </div>
 </template>

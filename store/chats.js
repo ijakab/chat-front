@@ -1,12 +1,10 @@
 export const state = () => ({
   chats: [],
-  bla: ''
 });
 
 export const mutations = {
   setChats(state, chats) {
     state.chats = chats
-    state.bla = 'sdfd'
   },
 };
 
