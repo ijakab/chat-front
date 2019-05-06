@@ -1,7 +1,7 @@
 <template>
   <div class="row">
     <chat-list class="col-3"></chat-list>
-    <div class="col-9">kls</div>
+    <div class="col-9">id je {{chatId}}</div>
   </div>
 </template>
 
@@ -13,10 +13,11 @@
       ChatList
     },
 
-    middleware: ['auth'],
-
-    async asyncData({app}) {
+    async asyncData({params, app}) {
       await app.store.dispatch('chats/getMyChats')
+      return {
+        chatId: params.id
+      }
     }
   }
 </script>
