@@ -4,8 +4,8 @@
     <create-chat></create-chat>
     <ul class="list-group">
       <button type="button" class="list-group-item d-flex justify-content-between align-items-center" v-for="chat in chats">
-        {{chat.title}}
-        <span class="badge badge-primary badge-pill">14</span>
+        {{chat.displayName}}
+        <span class="badge badge-primary badge-pill">{{chat.me.unread}}</span>
       </button>
     </ul>
   </div>
