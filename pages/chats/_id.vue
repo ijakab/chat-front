@@ -1,6 +1,6 @@
 <template>
   <div class="row">
-    <chat-list class="col-3"></chat-list>
+    <chat-list class="col-3" v-bind:activeChatId="chatId"></chat-list>
     <div class="col-9">id je {{chatId}}</div>
   </div>
 </template>
@@ -16,7 +16,7 @@
     async asyncData({params, app}) {
       await app.store.dispatch('chats/getMyChats')
       return {
-        chatId: params.id
+        chatId: Number(params.id)
       }
     }
   }
