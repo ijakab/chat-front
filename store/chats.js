@@ -6,6 +6,9 @@ export const mutations = {
   setChats(state, chats) {
     state.chats = chats
   },
+  addChat(state, chat) {
+    state.chats.unshift(chat)
+  }
 };
 
 export const actions = {

@@ -31,10 +31,14 @@
         let jwt = this.$auth.$state['token.refresh']
         this.$adonisWs.withJwtToken(jwt).connect()
         this.$adonisWs.on('open', () => {
-          const userChannel = this.$adonisWs.subscribe(`BOUser:${this.$auth.user.id}`)
+          const userChannel = this.$adonisWs.subscribe(`backOfficeUser:${this.$auth.user.id}`)
           userChannel.on('ready', () => {
-            this.$adonisWs.userChannel = this.$adonisWs.getSubscription(`BOUser:${this.$auth.user.id}`)
+            this.$adonisWs.userChannel = this.$adonisWs.getSubscription(`backOfficeUser:${this.$auth.user.id}`)
             this.$store.commit('general/setReady')
+
+            this.$adonisWs.userChannel.on('chatCreated', data => {
+              this.$store.commit('chats/addChat', data)
+            })
           })
         })
       }

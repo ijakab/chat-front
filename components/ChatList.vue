@@ -7,7 +7,7 @@
       <nuxt-link v-for="chat in chats" :key="chat.id" v-bind:to="'/chats/'+chat.id" >
         <button type="button" class="list-group-item d-flex justify-content-between align-items-center">
           {{chat.displayName}}
-          <span class="badge badge-primary badge-pill">{{chat.me.unread}}</span>
+          <span class="badge badge-primary badge-pill" v-if="chat.me.unread">{{chat.me.unread}}</span>
         </button>
       </nuxt-link>
     </ul>
