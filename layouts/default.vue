@@ -34,8 +34,28 @@
           const userChannel = this.$adonisWs.subscribe(`backOfficeUser:${this.$auth.user.id}`)
           userChannel.on('ready', () => {
             this.$adonisWs.userChannel = this.$adonisWs.getSubscription(`backOfficeUser:${this.$auth.user.id}`)
-            this.$store.commit('general/setReady')
 
+            //subscribe to all chat channels
+            this.$adonisWs.chatChannels = []
+            let promises = []
+            for(let chat of this.$store.state.chats.chats) {
+              promises.push(new Promise(resolve => {
+                let chatChannel = this.$adonisWs.subscribe(`chat:${chat.id}`)
+                chatChannel.on('ready', () => {
+                  this.$adonisWs.chatChannels.push({
+                    chatId: chat.id,
+                    channel: this.$adonisWs.getSubscription(`chat:${chat.id}`)
+                  })
+                  resolve()
+                })
+              }))
+            }
+
+            Promise.all(promises).then(() => {
+              this.$store.commit('general/setReady')
+            })
+
+            //listen to server events
             this.$adonisWs.userChannel.on('chatCreated', data => {
               this.$store.commit('chats/addChat', data)
             })

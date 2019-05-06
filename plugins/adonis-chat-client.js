@@ -8,7 +8,8 @@ const adonisWs = function (Vue) {
   if(!socketUrl) return
 
   let adonisWs = Ws(socketUrl, {
-    path: 'gbox-ws'
+    path: 'gbox-ws',
+    reconnection: false
   })
 
   Vue.prototype.$adonisWs = adonisWs
