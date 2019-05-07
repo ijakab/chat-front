@@ -1,6 +1,7 @@
 <template>
   <div class="container">
     <Header></Header>
+    <br>
     <nuxt v-if="displayChat" />
     <div v-if="!displayChat">
       Loading...
