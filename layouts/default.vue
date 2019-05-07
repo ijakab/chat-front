@@ -36,16 +36,11 @@
             this.$adonisWs.userChannel = this.$adonisWs.getSubscription(`backOfficeUser:${this.$auth.user.id}`)
 
             //subscribe to all chat channels
-            this.$adonisWs.chatChannels = []
             let promises = []
             for(let chat of this.$store.state.chats.chats) {
               promises.push(new Promise(resolve => {
                 let chatChannel = this.$adonisWs.subscribe(`chat:${chat.id}`)
                 chatChannel.on('ready', () => {
-                  this.$adonisWs.chatChannels.push({
-                    chatId: chat.id,
-                    channel: this.$adonisWs.getSubscription(`chat:${chat.id}`)
-                  })
                   resolve()
                 })
               }))
