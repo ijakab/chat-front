@@ -29,7 +29,14 @@
 
     methods: {
       sendMessage() {
-        console.log(this.currentMessage);
+        this.chatChannel.emit('message', this.currentMessage)
+        this.currentMessage = ''
+      }
+    },
+
+    mounted() {
+      if(process.browser) {
+        this.chatChannel = this.$adonisWs.getSubscription(`chat:${this.chatId}`)
       }
     },
 

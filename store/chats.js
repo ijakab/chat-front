@@ -13,7 +13,7 @@ export const mutations = {
 
 export const actions = {
   async getMyChats({state, commit}) {
-    let chats = await this.$socketRequestService.get('user/chats')
+    let chats = await this.$socketRequestService.post('chats/filter')
     commit('setChats', chats)
   },
 }
