@@ -40,10 +40,12 @@
       }
     },
 
-    async asyncData({params, app}) {
-      await app.store.dispatch('chats/getMyChats')
+    async asyncData({params, store}) {
+      let chatId = Number(params.id)
+      await store.dispatch('chats/getMyChats')
+      await store.dispatch('chats/getChatMessages', chatId)
       return {
-        chatId: Number(params.id)
+        chatId
       }
     }
   }
