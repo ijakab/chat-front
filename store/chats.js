@@ -9,9 +9,13 @@ export const mutations = {
   addChat(state, chat) {
     state.chats.unshift(chat)
   },
+  addMessageFromSocket(state, message) {
+    let chat = state.chats.find(c => c.id === message.chatId)
+    chat.messages.push(message)
+  },
   addMessagesToChat(state, {chat, messages}) {
     if(!chat.messages) chat.messages = []
-    chat.messages.unshift(...messages)
+    chat.messages.push(...messages)
   }
 };
 

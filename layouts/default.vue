@@ -42,6 +42,14 @@
               promises.push(new Promise(resolve => {
                 let chatChannel = this.$adonisWs.subscribe(`chat:${chat.id}`)
                 chatChannel.on('ready', () => {
+                  let subscription = this.$adonisWs.getSubscription(`chat:${chat.id}`)
+                  subscription.on('messageCreated', data => {
+                    this.$store.commit('chats/addMessageFromSocket', {
+                      ...data,
+                      chatId: chat.id
+                    })
+                  })
+
                   resolve()
                 })
               }))
