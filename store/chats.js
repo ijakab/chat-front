@@ -11,7 +11,7 @@ export const mutations = {
   },
   addMessagesToChat(state, {chat, messages}) {
     if(!chat.messages) chat.messages = []
-    chat.messages.push(...messages)
+    chat.messages.unshift(...messages)
   }
 };
 

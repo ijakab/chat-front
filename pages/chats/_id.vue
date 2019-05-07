@@ -3,6 +3,10 @@
     <chat-list class="col-3" v-bind:activeChatId="chatId"></chat-list>
 
     <div class="col-9">
+      <div v-for="message in chat.messages">
+        {{message.body}}
+      </div>
+
       <form v-on:submit.prevent="sendMessage">
         <div class="form-group">
           <input type="text" v-model="currentMessage" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Text something here">
@@ -24,6 +28,12 @@
     data: () => {
       return {
         currentMessage: ''
+      }
+    },
+
+    computed: {
+      chat() {
+        return this.$store.state.chats.chats.find(chat => chat.id === this.chatId)
       }
     },
 
