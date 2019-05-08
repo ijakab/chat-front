@@ -14,7 +14,7 @@ const adonisWs = function (Vue) {
 
   Vue.prototype.$adonisWs = adonisWs
 
-  Vue.prototype.$adonisWs.awaitClose = function () {
+  adonisWs.awaitClose = function () {
     return new Promise((resolve, reject) => {
       this.close()
 
@@ -24,6 +24,44 @@ const adonisWs = function (Vue) {
           return resolve()
         }
       }, 200)
+    })
+  }
+
+  adonisWs.subscribeToUser = function(id, store) {
+    return new Promise(resolve => {
+      const userChannel = adonisWs.subscribe(`backOfficeUser:${id}`)
+      userChannel.on('ready', () => {
+        adonisWs.userChannel = adonisWs.getSubscription(`backOfficeUser:${id}`)
+
+        //listen to server events
+        adonisWs.userChannel.on('chatCreated', data => {
+          adonisWs.subscribeToChat(data.id, store)
+          store.commit('chats/addChat', data)
+        })
+
+        //subscribe to all chat channels
+        let promises = store.state.chats.chats.map(chat => adonisWs.subscribeToChat(chat.id, store))
+        Promise.all(promises).then(() => {
+          store.commit('general/setReady')
+          resolve()
+        })
+      })
+    })
+  }
+
+  adonisWs.subscribeToChat = function (id, store) {
+    return new Promise(resolve => {
+      let chatChannel = adonisWs.subscribe(`chat:${id}`)
+      chatChannel.on('ready', () => {
+        let subscription = adonisWs.getSubscription(`chat:${id}`)
+        subscription.on('messageCreated', data => {
+          store.commit('chats/addMessageFromSocket', {
+            ...data,
+            chatId: id
+          })
+        })
+        resolve()
+      })
     })
   }
 
