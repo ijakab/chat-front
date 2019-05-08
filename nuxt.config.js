@@ -1,9 +1,12 @@
 import env from './env'
 const pkg = require('./package')
-import webpack from 'webpack'
 
 module.exports = {
   mode: 'universal',
+
+  server: {
+    port: env.server.port, // default: 3000
+  },
 
   /*
   ** Headers of the page
