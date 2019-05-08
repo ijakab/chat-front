@@ -11,6 +11,7 @@ export const mutations = {
   },
   addMessageFromSocket(state, message) {
     let chat = state.chats.find(c => c.id === message.chatId)
+    if(!chat.messages) chat.messages = []
     chat.messages.push(message)
   },
   addMessagesToChat(state, {chat, messages}) {
