@@ -1,5 +1,7 @@
 <template>
   <div class="container">
+    <nuxt-link to="/">nes </nuxt-link>
+    <nuxt-link to="/inspire">nes drugop</nuxt-link>
     <Header></Header>
     <br>
     <nuxt v-if="displayChat" />
