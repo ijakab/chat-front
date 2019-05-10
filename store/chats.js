@@ -6,6 +6,12 @@ export const mutations = {
   setChats(state, chats) {
     state.chats = chats
   },
+  putToTop(state, id) {
+    let chat = state.chats.find(chat => chat.id === id)
+    let index = state.chats.indexOf(chat)
+    state.chats.splice(index, 1)
+    state.chats.unshift(chat)
+  },
   addChat(state, chat) {
     state.chats.unshift(chat)
   },

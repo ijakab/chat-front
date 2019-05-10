@@ -40,6 +40,7 @@
     methods: {
       sendMessage() {
         this.chatChannel.emit('message', this.currentMessage)
+        this.$store.commit('chats/putToTop', this.chatId)
         this.currentMessage = ''
       }
     },
