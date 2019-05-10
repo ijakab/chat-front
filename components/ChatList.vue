@@ -6,6 +6,7 @@
     <ul class="list-group">
       <nuxt-link v-for="chat in chats" :key="chat.id" v-bind:to="'/chats/'+chat.id">
         <button type="button" class="list-group-item d-flex justify-content-between align-items-center" v-bind:class="{active: activeChatId === chat.id}" style="width: 100%">
+          <img v-for="profilePic in chat.profilePics" :src="profilePic" :alt="chat.displayName" :title="chat.displayName">
           {{chat.displayName}}
           <span class="badge badge-primary badge-pill" v-if="chat.me.unread">{{chat.me.unread}}</span>
         </button>

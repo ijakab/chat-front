@@ -34,7 +34,7 @@
     computed: {
       chat() {
         return this.$store.state.chats.chats.find(chat => chat.id === this.chatId)
-      }
+      },
     },
 
     methods: {

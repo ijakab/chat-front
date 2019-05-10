@@ -1,7 +1,7 @@
 export default {
   env: {
     subdomain: 'gaussdev',
-    apiBaseUrl: 'httpss://apigaussbox.jsteam.gaussx.com',
+    apiBaseUrl: 'https://apigaussbox.jsteam.gaussx.com',
     socketApiBaseUrl: 'https://apigaussbox.jsteam.gaussx.com/api/v1/socket/',
     socketUrl: 'ws://jsteam.gaussx.com:2132/',
   },
