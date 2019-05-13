@@ -55,6 +55,7 @@ const adonisWs = function (Vue) {
       chatChannel.on('ready', () => {
         let subscription = adonisWs.getSubscription(`chat:${id}`)
         subscription.on('messageCreated', data => {
+          store.commit('chats/putToTop', id)
           store.commit('chats/addMessageFromSocket', {
             ...data,
             chatId: id
