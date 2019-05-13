@@ -3,8 +3,17 @@
     <chat-list class="col-3" v-bind:activeChatId="chatId"></chat-list>
 
     <div class="col-9">
-      <div v-for="message in chat.messages" :key="message.id">
-        {{message.body}}
+      <div v-for="(message, index) in chat.messages" :key="message.id">
+        <div v-if="message.type === 'standard'">
+          <div v-if="!chat.messages[index-1] || !chat.messages[index-1].user || chat.messages[index-1].user.id !== message.user.id ">
+            <img :src="(chat.users[message.user.id] || chat.me).thumbnail" width="30" height="30"/>
+            <span>{{(chat.users[message.user.id] || chat.me).displayName}}</span>
+          </div>
+          <p>{{message.body}}</p>
+        </div>
+        <div v-if="message.type === 'system'">
+          <i>{{message.body}}</i>
+        </div>
       </div>
       <br><br>
       <form v-on:submit.prevent="sendMessage">
