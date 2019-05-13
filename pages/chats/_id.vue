@@ -56,6 +56,8 @@
     mounted() {
       if(process.browser) {
         this.chatChannel = this.$adonisWs.getSubscription(`chat:${this.chatId}`)
+        this.chatChannel.emit('seen')
+        this.$store.commit('chats/seenChat', this.chatId)
       }
     },
 
