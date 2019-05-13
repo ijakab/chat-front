@@ -72,12 +72,17 @@
 
     mounted() {
       if(process.browser) {
+        this.subscription = this.$adonisWs.subscribe(`chat:${this.chatId}`)
         this.channel = this.$adonisWs.userChannel
         this.channel.emit('seen', {
           chatId: this.chatId
         })
         this.$store.commit('chats/seenChat', this.chatId)
       }
+    },
+
+    destroyed() {
+      this.subscription.close()
     },
 
     async asyncData({params, store}) {
