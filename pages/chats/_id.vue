@@ -48,15 +48,20 @@
 
     methods: {
       sendMessage() {
-        this.chatChannel.emit('message', this.currentMessage)
+        this.channel.emit('message', {
+          chatId: this.chatId,
+          body: this.currentMessage
+        })
         this.currentMessage = ''
       }
     },
 
     mounted() {
       if(process.browser) {
-        this.chatChannel = this.$adonisWs.getSubscription(`chat:${this.chatId}`)
-        this.chatChannel.emit('seen')
+        this.channel = this.$adonisWs.userChannel
+        this.channel.emit('seen', {
+          chatId: this.chatId
+        })
         this.$store.commit('chats/seenChat', this.chatId)
       }
     },

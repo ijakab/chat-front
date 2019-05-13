@@ -22,7 +22,7 @@ export const mutations = {
     state.chats.unshift(chat)
   },
   addMessageFromSocket(state, message) {
-    let chat = state.chats.find(c => c.id === message.chatId)
+    let chat = state.chats.find(c => c.id === message.chat_id)
     chat.lastMessage = message
     if(!chat.messages) chat.messages = []
     chat.messages.push(message)

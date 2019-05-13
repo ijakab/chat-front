@@ -35,37 +35,20 @@ const adonisWs = function (Vue) {
 
         //listen to server events
         adonisWs.userChannel.on('chatCreated', data => {
-          adonisWs.subscribeToChat(data.id, store)
           store.commit('chats/addChat', data)
         })
-
-        //subscribe to all chat channels
-        let promises = store.state.chats.chats.map(chat => adonisWs.subscribeToChat(chat.id, store))
-        Promise.all(promises).then(() => {
-          store.commit('general/setReady')
-          resolve()
+  
+        adonisWs.userChannel.on('messageCreated', data => {
+          store.commit('chats/putToTop', data.chat_id)
+          store.commit('chats/addMessageFromSocket', data)
         })
-      })
-    })
-  }
-
-  adonisWs.subscribeToChat = function (id, store) {
-    return new Promise(resolve => {
-      let chatChannel = adonisWs.subscribe(`chat:${id}`)
-      chatChannel.on('ready', () => {
-        let subscription = adonisWs.getSubscription(`chat:${id}`)
-        subscription.on('messageCreated', data => {
-          store.commit('chats/putToTop', id)
-          store.commit('chats/addMessageFromSocket', {
-            ...data,
-            chatId: id
-          })
-        })
+  
+        store.commit('general/setReady')
         resolve()
       })
     })
   }
-
+  
 }
 
 Vue.use(adonisWs)
