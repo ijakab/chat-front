@@ -1,9 +1,14 @@
+import {keyBy} from 'lodash'
+
 export const state = () => ({
   chats: [],
 });
 
 export const mutations = {
   setChats(state, chats) {
+    for(let chat of chats) {
+      chat.users = keyBy(chat.users, user => user.id)
+    }
     state.chats = chats
   },
   putToTop(state, id) {
@@ -13,6 +18,7 @@ export const mutations = {
     state.chats.unshift(chat)
   },
   addChat(state, chat) {
+    chat.users = keyBy(chat.users, user => user.id)
     state.chats.unshift(chat)
   },
   addMessageFromSocket(state, message) {
