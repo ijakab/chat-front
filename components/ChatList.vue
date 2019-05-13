@@ -9,6 +9,7 @@
           <img v-for="profilePic in chat.profilePics" :src="profilePic" :alt="chat.displayName" :title="chat.displayName" width="20" height="20">
           {{chat.displayName}}
           <span class="badge badge-primary badge-pill" v-if="chat.me.unread">{{chat.me.unread}}</span>
+          <span>{{lastMessageDisplay(chat.lastMessage)}}</span>
         </button>
       </nuxt-link>
     </ul>
@@ -29,6 +30,13 @@
     computed: {
       chats() {
         return this.$store.state.chats.chats
+      },
+      lastMessageDisplay() {
+        return messageObject => {
+          if(!messageObject || !messageObject.body) return ''
+          if(messageObject.body.length < 20) return messageObject.body
+          else return messageObject.body.substr(0, 18) + '...'
+        }
       }
     }
   }
