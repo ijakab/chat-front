@@ -5,9 +5,9 @@
     <div class="col-9">
       <div v-for="(message, index) in chat.messages" :key="message.id">
         <div v-if="message.type === 'standard'">
-          <div v-if="!chat.messages[index-1] || !chat.messages[index-1].user || chat.messages[index-1].user.id !== message.user.id ">
-            <img :src="(chat.users[message.user.id] || chat.me).thumbnail" width="30" height="30"/>
-            <span>{{(chat.users[message.user.id] || chat.me).displayName}}</span>
+          <div v-if="!chat.messages[index-1] || !chat.messages[index-1].user_id || chat.messages[index-1].user_id !== message.user_id ">
+            <img :src="(chat.users[message.user_id] || chat.me).thumbnail" width="30" height="30"/>
+            <span>{{(chat.users[message.user_id] || chat.me).displayName}}</span>
           </div>
           <p>{{message.body}}</p>
         </div>
