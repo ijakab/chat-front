@@ -15,6 +15,9 @@
           <i>{{message.body}}</i>
         </div>
       </div>
+      <div v-if="userArray.length < 10">
+        Seen by {{seenBy}}
+      </div>
       <br><br>
       <form v-on:submit.prevent="sendMessage">
         <div class="form-group">
@@ -44,6 +47,17 @@
       chat() {
         return this.$store.state.chats.chats.find(chat => chat.id === this.chatId)
       },
+      userArray() {
+        return Object.values(this.chat.users)
+      },
+      seenBy() {
+        let users = this.userArray
+        console.log(users)
+        if(!users.length) return 'all'
+        let seenUsers = users.filter(user => !user.unread).map(user => user.firstName)
+        if(seenUsers.length === users.length) return 'all'
+        return seenUsers.join(', ')
+      }
     },
 
     methods: {
