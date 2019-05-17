@@ -16,7 +16,7 @@
         </div>
       </div>
       <div v-if="userArray.length < 10">
-        Seen by {{seenBy}}
+        {{seenBy}}
       </div>
       <br><br>
       <form v-on:submit.prevent="sendMessage">
@@ -51,12 +51,11 @@
         return Object.values(this.chat.users)
       },
       seenBy() {
-        let users = this.userArray
-        console.log(users)
-        if(!users.length) return 'all'
-        let seenUsers = users.filter(user => !user.unread).map(user => user.firstName)
-        if(seenUsers.length === users.length) return 'all'
-        return seenUsers.join(', ')
+        let seenArr = this.chat.seenBy
+        let chat = this.chat
+        if(!seenArr.length) return ''
+        if(seenArr.length === this.userArray.length) return 'Seen'
+        return 'Seen by ' + seenArr.map(id => chat.users[id].firstName).join(', ')
       }
     },
 
