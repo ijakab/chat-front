@@ -2,6 +2,7 @@ import {keyBy} from 'lodash'
 
 export const state = () => ({
   chats: [],
+  activeChat: 0
 });
 
 export const mutations = {
@@ -23,6 +24,7 @@ export const mutations = {
   },
   addMessageFromSocket(state, message) {
     let chat = state.chats.find(c => c.id === message.chat_id)
+    if(chat.id !== state.activeChat) chat.me.unread++
     chat.lastMessage = message
     if(!chat.messages) chat.messages = []
     chat.messages.push(message)
@@ -34,6 +36,9 @@ export const mutations = {
   addMessagesToChat(state, {chat, messages}) {
     if(!chat.messages) chat.messages = []
     chat.messages.push(...messages)
+  },
+  setActiveChat(state, id) {
+    state.activeChat = id
   }
 };
 

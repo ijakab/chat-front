@@ -78,6 +78,7 @@
           chatId: this.chatId
         })
         this.$store.commit('chats/seenChat', this.chatId)
+        this.$store.commit('chats/setActiveChat', this.chatId)
       }
     },
 
