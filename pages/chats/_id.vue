@@ -51,11 +51,11 @@
         return Object.values(this.chat.users)
       },
       seenBy() {
-        let seenArr = this.chat.seenBy
-        let chat = this.chat
-        if(!seenArr.length) return ''
-        if(seenArr.length === this.userArray.length) return 'Seen'
-        return 'Seen by ' + seenArr.map(id => chat.users[id].firstName).join(', ')
+       let seenArr = this.chat.seenBy
+       let chat = this.chat
+       if(!seenArr.length) return ''
+       if(seenArr.length === this.userArray.length) return 'Seen'
+       return 'Seen by ' + seenArr.map(id => chat.users[id].firstName).join(', ')
       }
     },
 

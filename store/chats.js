@@ -29,7 +29,9 @@ export const mutations = {
     if(!chat.messages) chat.messages = []
     chat.messages.push(message)
     
-    chat.seenBy = activeUsers
+    let myIndex = message.activeUsers.indexOf(chat.me.id)
+    if(myIndex !== -1) message.activeUsers.splice(myIndex, 1)
+    chat.seenBy = message.activeUsers
   },
   seenChat(state, chatId) {
     let chat = state.chats.find(c => c.id === chatId)
