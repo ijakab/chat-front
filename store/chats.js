@@ -37,6 +37,10 @@ export const mutations = {
     let chat = state.chats.find(c => c.id === chatId)
     chat.me.unread = 0
   },
+  userSeenChat(state, response) {
+    let chat = state.chats.find(chat => chat.id === response.chatId)
+    if(!chat.seenBy.find(id => id === response.userId)) chat.seenBy.push(response.userId)
+  },
   addMessagesToChat(state, {chat, messages}) {
     if(!chat.messages) chat.messages = []
     chat.messages.push(...messages)
