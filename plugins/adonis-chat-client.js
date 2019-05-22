@@ -42,12 +42,11 @@ const adonisWs = function (Vue) {
           store.commit('chats/putToTop', data.chat_id)
           store.commit('chats/addMessageFromSocket', data)
         })
-  
-        adonisWs.userChannel.on('messageCreated', data => {
-          store.commit('chats/putToTop', data.chat_id)
-          store.commit('chats/addMessageFromSocket', data)
+        
+        adonisWs.userChannel.on('userSeen', data => {
+          store.commit('chats/userSeenChat', data)
         })
-  
+        
         store.commit('general/setReady')
         resolve()
       })
