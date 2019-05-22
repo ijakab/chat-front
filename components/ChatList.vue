@@ -6,16 +6,36 @@
     <ul class="list-group">
       <nuxt-link v-for="chat in chats" :key="chat.id" v-bind:to="'/chats/'+chat.id">
         <button type="button" class="list-group-item d-flex justify-content-between align-items-center" v-bind:class="{active: activeChatId === chat.id}" style="width: 100%">
+          <span class="badge badge-pill" :class="statusColor(chat)+'-status'" v-if="chat.chatStatus">j</span>
           <img v-for="profilePic in chat.profilePics" :src="profilePic" :alt="chat.displayName" :title="chat.displayName" width="20" height="20">
           {{chat.displayName}}
           <span class="badge badge-primary badge-pill" v-if="chat.me.unread">{{chat.me.unread}}</span>
-          <span>{{lastMessageDisplay(chat.lastMessage)}}</span>
+          <div><span>{{lastMessageDisplay(chat.lastMessage)}}</span></div>
         </button>
       </nuxt-link>
     </ul>
 
   </div>
 </template>
+
+<style>
+  .green-status {
+    color: green;
+    background: green;
+  }
+  .gray-status {
+    color: gray;
+    background: gray;
+  }
+  .red-status {
+    color: red;
+    background: red;
+  }
+  .yellow-status {
+    color: yellow;
+    background: yellow;
+  }
+</style>
 
 <script>
   import CreateChat from '~/components/Modals/CreateChat'
@@ -28,6 +48,9 @@
     props: ['activeChatId'],
 
     computed: {
+      statuses() {
+        return this.$store.state.general.meta.statuses
+      },
       chats() {
         return this.$store.state.chats.chats
       },
@@ -36,6 +59,13 @@
           if(!messageObject || !messageObject.body) return ''
           if(messageObject.body.length < 20) return messageObject.body
           else return messageObject.body.substr(0, 18) + '...'
+        }
+      },
+      statusColor() {
+        let statuses = this.statuses
+        console.log(statuses)
+        return chat => {
+          return statuses[chat.chatStatus].color
         }
       }
     }
