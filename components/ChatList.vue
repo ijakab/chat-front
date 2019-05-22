@@ -63,8 +63,8 @@
       },
       statusColor() {
         let statuses = this.statuses
-        console.log(statuses)
         return chat => {
+
           return statuses[chat.chatStatus].color
         }
       }
