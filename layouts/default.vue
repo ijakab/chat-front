@@ -37,6 +37,6 @@
           this.$adonisWs.subscribeToUser(this.$auth.user.id, this.$store)
         })
       }
-    }
+    },
   }
 </script>
