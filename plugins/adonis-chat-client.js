@@ -47,6 +47,10 @@ const adonisWs = function (Vue) {
           store.commit('chats/userSeenChat', data)
         })
         
+        adonisWs.userChannel.on('userStatusChange', data => {
+          store.commit('chats/setUserStatus', data)
+        })
+        
         store.commit('general/setReady')
         resolve()
       })
