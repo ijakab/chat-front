@@ -2,7 +2,7 @@
   <div class="container">
     <nuxt-link to="/">nes </nuxt-link>
     <nuxt-link to="/inspire">nes drugop</nuxt-link>
-    <Header></Header>
+    <Header v-if="displayChat"></Header>
     <br>
     <nuxt v-if="displayChat" />
     <div v-if="!displayChat">

@@ -47,6 +47,11 @@ export const mutations = {
   },
   setActiveChat(state, id) {
     state.activeChat = id
+  },
+  setMyStatus(state, status) {
+    for(let chat of state.chats) {
+      chat.me.status = status
+    }
   }
 };
 

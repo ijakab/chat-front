@@ -19,7 +19,7 @@
 
     computed: {
       user() {
-        return this.$auth.state.user.details
+        return this.$auth.$state.user.details
       },
       canChangeStatus() {
         return this.$store.state.chats.chats.length
@@ -31,7 +31,8 @@
 
     methods: {
       changeStatus() {
-        console.log('hocu', this.status)
+        this.channel.emit('setChatStatus', this.status)
+        this.$store.commit('chats/setMyStatus', this.status)
       },
       async logout() {
         await this.$auth.logout()
@@ -42,6 +43,9 @@
     mounted() {
       let firstChat = this.$store.state.chats.chats[0]
       this.status = firstChat && firstChat.me.status
+      if(process.browser) {
+        this.channel = this.$adonisWs.userChannel
+      }
     },
   }
 </script>

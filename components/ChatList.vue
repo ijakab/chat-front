@@ -6,7 +6,7 @@
     <ul class="list-group">
       <nuxt-link v-for="chat in chats" :key="chat.id" v-bind:to="'/chats/'+chat.id">
         <button type="button" class="list-group-item d-flex justify-content-between align-items-center" v-bind:class="{active: activeChatId === chat.id}" style="width: 100%">
-          <span class="badge badge-pill" :class="statusColor(chat)+'-status'" v-if="chat.chatStatus">j</span>
+          <span class="badge badge-pill" :class="statusColor(chat)+'-status'">j</span>
           <img v-for="profilePic in chat.profilePics" :src="profilePic" :alt="chat.displayName" :title="chat.displayName" width="20" height="20">
           {{chat.displayName}}
           <span class="badge badge-primary badge-pill" v-if="chat.me.unread">{{chat.me.unread}}</span>
@@ -64,8 +64,21 @@
       statusColor() {
         let statuses = this.statuses
         return chat => {
-
-          return statuses[chat.chatStatus].color
+          let users = Object.values(chat.users)
+          if(users.length === 0) {
+            return statuses[chat.me.chatStatus].color
+          } else if(users.length === 1) {
+            return statuses[users[0].chatStatus].color
+          } else {
+            let status = users[0].chatStatus
+            for(let user of users) {
+              if(user.chatStatus !== status) {
+                console.log(user)
+                return 'gray'
+              }
+            }
+            return statuses[status].color
+          }
         }
       }
     }
