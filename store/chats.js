@@ -50,7 +50,7 @@ export const mutations = {
   },
   setMyStatus(state, status) {
     for(let chat of state.chats) {
-      chat.me.status = status
+      chat.me.chatStatus = status
     }
   }
 };
