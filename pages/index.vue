@@ -1,7 +1,7 @@
 <template>
-  <div class="row">
-    <chat-list class="col-3"></chat-list>
-    <div class="col-9">kls</div>
+  <div class="inbox_msg">
+    <chat-list></chat-list>
+    <div></div>
   </div>
 </template>
 

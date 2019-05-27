@@ -1,31 +1,48 @@
 <template>
-  <div class="row">
-    <chat-list class="col-3" v-bind:activeChatId="chatId"></chat-list>
+  <div class="inbox_msg">
+    <chat-list v-bind:activeChatId="chatId"></chat-list>
 
-    <div class="col-9">
-      <div v-for="(message, index) in chat.messages" :key="message.id">
-        <div v-if="message.type === 'standard'">
-          <div v-if="!chat.messages[index-1] || !chat.messages[index-1].user_id || chat.messages[index-1].user_id !== message.user_id ">
-            <img :src="(chat.users[message.user_id] || chat.me).thumbnail" width="30" height="30"/>
-            <span>{{(chat.users[message.user_id] || chat.me).displayName}}</span>
+    <div class="mesgs">
+      <div class="msg_history">
+
+        <div v-for="(message, index) in chat.messages" :key="message.id" :class="{incoming_msg: !isMine(message), outgoing_msg: isMine(message)}" >
+
+          <div v-if="!isMine(message) && message.type === 'standard'">
+            <div v-if="!chat.messages[index-1] || !chat.messages[index-1].user_id || chat.messages[index-1].user_id !== message.user_id" class="incoming_msg_img">
+              <img :src="(chat.users[message.user_id] || chat.me).thumbnail" width="30" height="30"/>
+            </div>
           </div>
-          <p>{{message.body}}</p>
-        </div>
-        <div v-if="message.type === 'system'">
-          <i>{{message.body}}</i>
-        </div>
-      </div>
-      <div v-if="userArray.length < 10">
-        {{seenBy}}
-      </div>
-      <br><br>
-      <form v-on:submit.prevent="sendMessage">
-        <div class="form-group">
-          <input type="text" v-model="currentMessage" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Text something here">
-        </div>
-      </form>
-    </div>
 
+          <div :class="{received_msg: !isMine(message), sent_msg: isMine(message)}">
+          <div v-if="message.type === 'standard'">
+            <div :class="{received_withd_msg: !isMine(message)} ">
+              <p>{{message.body}}</p>
+              <span class="time_date">{{messageTime(message)}}</span> </div>
+            </div>
+          </div>
+
+          <div v-if="message.type === 'system'">
+            <i>{{message.body}}</i>
+          </div>
+
+        </div>
+
+          <div v-if="userArray.length < 10">
+            {{seenBy}}
+          </div>
+
+        </div>
+
+        <div class="type_msg">
+          <div class="input_msg_write">
+            <form v-on:submit.prevent="sendMessage">
+                <input type="text" v-model="currentMessage" class="write_msg" id="exampleInputEmail1" placeholder="Text something here" />
+                <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+            </form>
+          </div>
+        </div>
+
+      </div>
   </div>
 </template>
 
@@ -50,13 +67,24 @@
       userArray() {
         return Object.values(this.chat.users)
       },
+      isMine() {
+        return message => {
+          return this.chat.me.id === message.user_id
+        }
+      },
       seenBy() {
         let chat = this.chat
         let seenArr = this.chat.seenBy
 
-       if(!seenArr.length) return ''
-       if(seenArr.length === this.userArray.length) return 'Seen'
-       return 'Seen by ' + seenArr.map(id => chat.users[id].firstName).join(', ')
+        if(!seenArr.length) return ''
+        if(seenArr.length === this.userArray.length) return 'Seen'
+        return 'Seen by ' + seenArr.map(id => chat.users[id].firstName).join(', ')
+      },
+      messageTime() {
+        return message => {
+          let date = new Date(message.updated_at)
+          return date.toLocaleTimeString('hr-HR')
+        }
       }
     },
 

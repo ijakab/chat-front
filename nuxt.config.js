@@ -41,7 +41,8 @@ module.exports = {
   ** Global CSS
   */
   css: [
-    '@/static/styles/bootstrap'
+    '@/static/styles/bootstrap',
+    '@/static/styles/custom',
   ],
 
   /*

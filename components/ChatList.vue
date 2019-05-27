@@ -1,19 +1,35 @@
 <template>
-  <div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">Add new</button>
+  <div class="inbox_people">
+
+    <div class="headind_srch">
+      <div class="recent_heading">
+        <h4>Recent</h4>
+      </div>
+      <div class="srch_bar">
+        <div class="stylish-input-group">
+          <input type="text" class="search-bar"  placeholder="Search" >
+          <span data-toggle="modal" data-target="#exampleModal">+</span>
+        </div>
+      </div>
+    </div>
+
     <create-chat></create-chat>
 
-    <ul class="list-group">
-      <nuxt-link v-for="chat in chats" :key="chat.id" v-bind:to="'/chats/'+chat.id">
-        <button type="button" class="list-group-item d-flex justify-content-between align-items-center" v-bind:class="{active: activeChatId === chat.id}" style="width: 100%">
-          <span class="badge badge-pill" :class="statusColor(chat)+'-status'">j</span>
-          <img v-for="profilePic in chat.profilePics" :src="profilePic" :alt="chat.displayName" :title="chat.displayName" width="20" height="20">
-          {{chat.displayName}}
-          <span class="badge badge-primary badge-pill" v-if="chat.me.unread">{{chat.me.unread}}</span>
-          <div><span>{{lastMessageDisplay(chat.lastMessage)}}</span></div>
-        </button>
-      </nuxt-link>
-    </ul>
+    <div class="inbox_chat">
+      <div class="chat_list" v-for="chat in chats" :key="chat.id" v-bind:class="{active_chat: activeChatId === chat.id}" >
+        <nuxt-link v-bind:to="'/chats/'+chat.id">
+          <div class="chat_people">
+            <div class="chat_img" v-for="profilePic in chat.profilePics"> <img :src="profilePic" :alt="chat.displayName"> </div>
+            <div class="chat_ib">
+              <h5>{{chat.displayName}} <span class="chat_date">{{lastMessageAt(chat)}}</span></h5>
+              <p>{{lastMessageDisplay(chat.lastMessage)}}.</p>
+              <p>{{chat.me.unread}}</p>
+              <span class="badge badge-pill" :class="statusColor(chat)+'-status'">j</span>
+            </div>
+          </div>
+        </nuxt-link>
+      </div>
+    </div>
 
   </div>
 </template>
@@ -53,6 +69,12 @@
       },
       chats() {
         return this.$store.state.chats.chats
+      },
+      lastMessageAt() {
+        return chat => {
+          let date = new Date(chat.last_message_at)
+          return date.toLocaleDateString('hr-HR')
+        }
       },
       lastMessageDisplay() {
         return messageObject => {
