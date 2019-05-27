@@ -9,7 +9,7 @@
 
           <div v-if="!isMine(message) && message.type === 'standard'">
             <div v-if="!chat.messages[index-1] || !chat.messages[index-1].user_id || chat.messages[index-1].user_id !== message.user_id" class="incoming_msg_img">
-              <img :src="(chat.users[message.user_id] || chat.me).thumbnail" width="30" height="30"/>
+              <img :src="(chat.users[message.user_id] || chat.me).thumbnail"/>
             </div>
           </div>
 
@@ -21,7 +21,7 @@
             </div>
           </div>
 
-          <div v-if="message.type === 'system'">
+          <div v-if="message.type === 'system'" class="text-center">
             <i>{{message.body}}</i>
           </div>
 
@@ -37,7 +37,7 @@
           <div class="input_msg_write">
             <form v-on:submit.prevent="sendMessage">
                 <input type="text" v-model="currentMessage" class="write_msg" id="exampleInputEmail1" placeholder="Text something here" />
-                <button class="msg_send_btn" type="button"><i class="fa fa-paper-plane-o" aria-hidden="true"></i></button>
+                <button class="msg_send_btn" type="button">➤</button>
             </form>
           </div>
         </div>

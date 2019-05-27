@@ -8,7 +8,7 @@
       <div class="srch_bar">
         <div class="stylish-input-group">
           <input type="text" class="search-bar"  placeholder="Search" >
-          <span data-toggle="modal" data-target="#exampleModal">+</span>
+          <span data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;">  ⊕</span>
         </div>
       </div>
     </div>

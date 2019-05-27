@@ -43,6 +43,7 @@ module.exports = {
   css: [
     '@/static/styles/bootstrap',
     '@/static/styles/custom',
+    
   ],
 
   /*
