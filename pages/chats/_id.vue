@@ -138,7 +138,9 @@
         })
       }, 2000),
       async loadMore($state) {
-        await this.$store.dispatch('chats/loadMore', this.chatId)
+        let allLoaded = await this.$store.dispatch('chats/loadMore', this.chat)
+        $state.loaded()
+        if(allLoaded) $state.complete()
       },
       scrollToBottom() {
         this.$nextTick(() => {
@@ -169,7 +171,7 @@
       await store.dispatch('chats/getMyChats')
       await store.dispatch('chats/getChatMessages', chatId)
       return {
-        chatId
+        chatId,
       }
     }
   }

@@ -74,7 +74,7 @@ export const mutations = {
         chat.currentlyTyping.splice(index, 1)
       }
     }
-  }
+  },
 };
 
 export const actions = {
@@ -87,11 +87,11 @@ export const actions = {
     let messages = await this.$socketRequestService.post(`messages/${chat.id}/filter`)
     commit('addMessagesToChat', {chat, messages})
   },
-  async loadMore({commit, state}, chatId) {
-    console.log('ide laoding')
-    let chat = state.chats.find(chat => chat.id === chatId)
+  async loadMore({commit, state}, chatOrId) {
+    let chat = typeof chatOrId === 'number' ? state.chats.find(chat => chat.id === chatOrId) : chatOrId
     let oldestMessageId = chat.messages[0].id
-    let messages = await this.$socketRequestService.post(`messages/${chatId}/filter?lastId=${oldestMessageId}`)
+    let messages = await this.$socketRequestService.post(`messages/${chat.id}/filter?lastId=${oldestMessageId}`)
     commit('addMessagesToChat', {chat, messages})
+    if(!messages.length) return  true
   }
 }
