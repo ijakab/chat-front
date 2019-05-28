@@ -75,6 +75,10 @@ export const mutations = {
       }
     }
   },
+  deleteMessage(state, message) {
+    message.body = 'Deleted message'
+    message.type = 'system'
+  }
 };
 
 export const actions = {

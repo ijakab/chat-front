@@ -22,6 +22,12 @@
       <div :class="{received_msg: !isMine(message), sent_msg: isMine(message)}">
         <div v-if="message.type === 'standard'">
           <div :class="{received_withd_msg: !isMine(message)} ">
+
+            <div class="msg_actions" v-if="isMine(message)">
+              <span v-on:click="deleteMessage(message)">X</span>
+              <span>Y</span>
+            </div>
+
             <p>{{message.body}}</p>
             <span class="time_date">{{messageTime(message)}}</span> </div>
         </div>
@@ -99,6 +105,9 @@
         this.$nextTick(() => {
           this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
         })
+      },
+      deleteMessage(message) {
+        this.channel.emit('deleteMessage', message.id)
       }
     },
 
