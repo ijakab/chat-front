@@ -138,7 +138,7 @@
         })
       }, 2000),
       async loadMore($state) {
-        await this.$store.dispatch('chats/loadMore')
+        await this.$store.dispatch('chats/loadMore', this.chatId)
       },
       scrollToBottom() {
         this.$nextTick(() => {

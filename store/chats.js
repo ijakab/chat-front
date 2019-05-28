@@ -45,7 +45,7 @@ export const mutations = {
   },
   addMessagesToChat(state, {chat, messages}) {
     if(!chat.messages) chat.messages = []
-    chat.messages.push(...messages)
+    chat.messages.unshift(...messages)
   },
   setActiveChat(state, id) {
     state.activeChat = id
@@ -87,7 +87,11 @@ export const actions = {
     let messages = await this.$socketRequestService.post(`messages/${chat.id}/filter`)
     commit('addMessagesToChat', {chat, messages})
   },
-  async loadMore({commit}) {
-    console.log('ide loading')
+  async loadMore({commit, state}, chatId) {
+    console.log('ide laoding')
+    let chat = state.chats.find(chat => chat.id === chatId)
+    let oldestMessageId = chat.messages[0].id
+    let messages = await this.$socketRequestService.post(`messages/${chatId}/filter?lastId=${oldestMessageId}`)
+    commit('addMessagesToChat', {chat, messages})
   }
 }

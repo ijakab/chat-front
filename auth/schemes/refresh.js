@@ -133,8 +133,6 @@ export default class RefreshScheme {
 
             let {data} = await $axios[method](url)
 
-            console.log(data, 'aaaaaa')
-
             token = data[propertyName].tokens.accessToken
 
             refreshToken = data[propertyName].tokens.refreshToken
@@ -150,7 +148,6 @@ export default class RefreshScheme {
         }
       } catch (e) {
         await this.logout()
-        console.log(e.message)
       }
 
       return config
