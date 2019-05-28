@@ -2,8 +2,8 @@
   <header>
     <div>{{user.displayName}}<button class="btn btn-danger btn-sm" v-on:click="logout()">Logout</button></div>
 
-    <select v-if="canChangeStatus" v-model="status" @change="changeStatus">
-      <option v-for="availableStatus in Object.keys(statuses)" :value="availableStatus" >{{availableStatus}}</option>
+    <select v-if="canChangeStatus" @change="changeStatus($event)">
+      <option v-for="availableStatus in Object.keys(statuses)" :value="availableStatus" :selected="myStatus === availableStatus">{{availableStatus}}</option>
     </select>
 
   </header>
@@ -11,11 +11,6 @@
 
 <script>
   export default {
-    data: () => {
-      return {
-        status: ''
-      }
-    },
 
     computed: {
       user() {
@@ -27,12 +22,15 @@
       statuses() {
         return this.$store.state.general.meta.statuses
       },
+      myStatus() {
+        return this.$store.state.chats.chats.length ? this.$store.state.chats.chats[0].me.chatStatus : 'online'
+      }
     },
 
     methods: {
-      changeStatus() {
-        this.channel.emit('setChatStatus', this.status)
-        this.$store.commit('chats/setMyStatus', this.status)
+      changeStatus(event) {
+        this.channel.emit('setChatStatus', event.target.value)
+        this.$store.commit('chats/setMyStatus', event.target.value)
       },
       async logout() {
         await this.$auth.logout()
