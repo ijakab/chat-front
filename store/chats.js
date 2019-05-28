@@ -9,17 +9,19 @@ export const mutations = {
   setChats(state, chats) {
     for(let chat of chats) {
       chat.users = keyBy(chat.users, user => user.id)
+      chat.currentlyTyping = []
     }
     state.chats = chats
+  },
+  addChat(state, chat) {
+    chat.users = keyBy(chat.users, user => user.id)
+    chat.currentlyTyping = []
+    state.chats.unshift(chat)
   },
   putToTop(state, id) {
     let chat = state.chats.find(chat => chat.id === id)
     let index = state.chats.indexOf(chat)
     state.chats.splice(index, 1)
-    state.chats.unshift(chat)
-  },
-  addChat(state, chat) {
-    chat.users = keyBy(chat.users, user => user.id)
     state.chats.unshift(chat)
   },
   addMessageFromSocket(state, message) {
@@ -57,6 +59,19 @@ export const mutations = {
     for(let chat of state.chats) {
       if(chat.users[userId]) {
         chat.users[userId].chatStatus = status
+      }
+    }
+  },
+  setTyping(state, {chatId, isTyping, userId}) {
+    let chat = state.chats.find(chat => chat.id === chatId)
+    if(chat.me.id === userId) return
+    if(isTyping) {
+      if(chat.currentlyTyping.find(id => id === userId)) return
+      chat.currentlyTyping.push(userId)
+    } else {
+      let index = chat.currentlyTyping.indexOf(userId)
+      if(index !== -1) {
+        chat.currentlyTyping.splice(index, 1)
       }
     }
   }
