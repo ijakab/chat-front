@@ -23,6 +23,7 @@
     "nuxt": "^2.4.0",
     "sass-loader": "^7.1.0",
     "sweetalert2": "^8.2.6",
+    "vue-infinite-loading": "^2.4.4",
     "vuetify": "^1.5.0",
     "vuetify-loader": "^1.2.0"
   },

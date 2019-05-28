@@ -86,5 +86,8 @@ export const actions = {
     let chat = typeof chatOrId === 'number' ? state.chats.find(chat => chat.id === chatOrId) : chatOrId
     let messages = await this.$socketRequestService.post(`messages/${chat.id}/filter`)
     commit('addMessagesToChat', {chat, messages})
+  },
+  async loadMore({commit}) {
+    console.log('ide loading')
   }
 }

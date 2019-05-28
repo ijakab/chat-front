@@ -3,7 +3,18 @@
     <chat-list v-bind:activeChatId="chatId"></chat-list>
 
     <div class="mesgs">
-      <div class="msg_history">
+      <div class="msg_history" ref="messages">
+
+        <no-ssr>
+          <infinite-loading
+            :distance="0"
+            direction="top"
+            @infinite="loadMore"
+          >
+            <div slot="no-more"></div>
+            <div slot="no-results"></div>
+          </infinite-loading>
+        </no-ssr>
 
         <div v-for="(message, index) in chat.messages" :key="message.id" :class="{incoming_msg: !isMine(message), outgoing_msg: isMine(message)}" >
 
@@ -52,10 +63,13 @@
 <script>
   import ChatList from '~/components/ChatList'
   import {debounce} from 'lodash'
+  import InfiniteLoading from 'vue-infinite-loading';
+
 
   export default {
     components: {
-      ChatList
+      ChatList,
+      InfiniteLoading
     },
 
     data: () => {
@@ -123,10 +137,19 @@
           isTyping: false
         })
       }, 2000),
+      async loadMore($state) {
+        await this.$store.dispatch('chats/loadMore')
+      },
+      scrollToBottom() {
+        this.$nextTick(() => {
+          this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
+        })
+      }
     },
 
     mounted() {
       if(process.browser) {
+        this.scrollToBottom()
         this.subscription = this.$adonisWs.subscribe(`chat:${this.chatId}`)
         this.channel = this.$adonisWs.userChannel
         this.channel.emit('seen', {
