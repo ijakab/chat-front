@@ -85,6 +85,6 @@ export const actions = {
   async getChatMessages({commit, state}, chatOrId) {
     let chat = typeof chatOrId === 'number' ? state.chats.find(chat => chat.id === chatOrId) : chatOrId
     let messages = await this.$socketRequestService.post(`messages/${chat.id}/filter`)
-    commit('addMessagesToChat', {chat, messages: messages.data})
+    commit('addMessagesToChat', {chat, messages})
   }
 }
