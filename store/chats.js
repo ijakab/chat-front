@@ -75,9 +75,10 @@ export const mutations = {
       }
     }
   },
-  deleteMessage(state, message) {
-    message.body = 'Deleted message'
-    message.type = 'system'
+  updateMessage(state, data) {
+    let chat = state.chats.find(chat => chat.id === data.chatId)
+    let message = chat.messages.find(message => message.id === data.message.id)
+    Object.assign(message, data.message)
   }
 };
 

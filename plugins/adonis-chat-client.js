@@ -54,6 +54,10 @@ const adonisWs = function (Vue) {
         adonisWs.userChannel.on('userTyping', data => {
           store.commit('chats/setTyping', data)
         })
+  
+        adonisWs.userChannel.on('messageUpdated', data => {
+          store.commit('chats/updateMessage', data)
+        })
         
         store.commit('general/setReady')
         resolve()
