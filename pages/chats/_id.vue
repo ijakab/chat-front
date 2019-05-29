@@ -2,6 +2,10 @@
   <div class="inbox_msg">
     <chat-list v-bind:activeChatId="chatId"></chat-list>
     <div class="mesgs">
+      <div class="chat-header clearfix">
+        <h4 class="chat-title float-left">{{chat.displayName}}</h4>
+        <p class="info-btn float-right">ⓘ</p>
+      </div>
       <message-list :chatId="chatId"></message-list>
       <add-message :chatId="chatId"></add-message>
     </div>
@@ -21,6 +25,12 @@
     },
 
     middleware: ['auth'],
+
+    computed: {
+      chat() {
+        return this.$store.state.chats.chats.find(chat => chat.id === this.chatId)
+      },
+    },
 
     mounted() {
       if(process.browser) {

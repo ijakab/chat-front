@@ -22,7 +22,7 @@ img{ max-width:100%;}
 }
 .headind_srch{ padding:10px 29px 10px 20px; overflow:hidden; border-bottom:1px solid #c4c4c4;}
 
-.recent_heading h4 {
+.chat-title {
   color: #05728f;
   font-size: 20px;
   margin: auto;
@@ -189,4 +189,15 @@ img{ max-width:100%;}
   bottom: 5%;
   right: 5%;
   z-index: 9;
+}
+
+.chat-header {
+  border-bottom: 1px solid #c4c4c4;
+  padding-right: 10px;
+}
+.info-btn {
+  text-align: left;
+  font-size: 1.2em;
+  color: #05728f;
+  cursor: pointer;
 }
