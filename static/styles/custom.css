@@ -61,8 +61,9 @@ img{ max-width:100%;}
 .active_chat{ background:#ebebeb;}
 
 .incoming_msg_img {
-  display: inline-block;
-  width: 6%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
 }
 .received_msg {
   display: inline-block;
