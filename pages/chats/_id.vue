@@ -6,6 +6,7 @@
       <div class="chat-header clearfix">
         <h4 class="chat-title float-left">{{chat.displayName}}</h4>
         <p class="info-btn float-right" data-toggle="modal" data-target="#updateChatModal" v-if="chat.me.admin">ⓘ</p>
+        <p class="info-btn float-right">⇠</p>
       </div>
       <message-list :chatId="chatId"></message-list>
       <add-message :chatId="chatId"></add-message>
