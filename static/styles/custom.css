@@ -24,7 +24,7 @@ img{ max-width:100%;}
 
 .recent_heading h4 {
   color: #05728f;
-  font-size: 21px;
+  font-size: 20px;
   margin: auto;
 }
 .srch_bar input{ border:1px solid #cdcdcd; border-width:0 0 1px 0; width:80%; padding:2px 0 4px 6px; background:none;}
@@ -56,7 +56,7 @@ img{ max-width:100%;}
   margin: 0;
   padding: 18px 16px 10px;
 }
-.inbox_chat { height: 550px; overflow-y: scroll;}
+.inbox_chat { height: 550px; overflow-y: scroll; position: relative}
 
 .active_chat{ background:#ebebeb;}
 
@@ -173,4 +173,20 @@ img{ max-width:100%;}
 }
 .incoming_msg_img .user-item{
   display: inline-block;
+}
+.new-chat-button {
+  cursor: pointer;
+  background: #05728f none repeat scroll 0 0;
+  display: block;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-radius: 50%;
+  color:white;
+  vertical-align: center;
+  font-size: 29px;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+  z-index: 9;
 }

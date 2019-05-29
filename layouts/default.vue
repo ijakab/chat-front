@@ -1,9 +1,5 @@
 <template>
   <div class="container">
-    <nuxt-link to="/">nes </nuxt-link>
-    <nuxt-link to="/inspire">nes drugop</nuxt-link>
-
-        <Header v-if="displayChat"></Header>
         <div class="inbox_msg">
             <nuxt v-if="displayChat" />
         </div>
@@ -12,7 +8,6 @@
         </div>
 
     <footer>
-      <span>&copy; 2019</span>
     </footer>
   </div>
 </template>

@@ -3,12 +3,14 @@
 
     <div class="headind_srch">
       <div class="recent_heading">
-        <h4>Recent</h4>
+        <h4>{{user.displayName}}</h4>
       </div>
       <div class="srch_bar">
         <div class="stylish-input-group">
-          <input type="text" class="search-bar"  placeholder="Search" >
-          <span data-toggle="modal" data-target="#exampleModal" style="cursor: pointer;">  ⊕</span>
+          <button class="btn btn-danger btn-sm" v-on:click="logout()">Logout</button>
+          <select @change="changeStatus($event)">
+            <option v-for="availableStatus in Object.keys(statuses)" :value="availableStatus" :selected="myStatus === availableStatus">{{availableStatus}}</option>
+          </select>
         </div>
       </div>
     </div>
@@ -16,6 +18,7 @@
     <create-chat></create-chat>
 
     <div class="inbox_chat">
+      <span data-toggle="modal" data-target="#exampleModal" class="new-chat-button">+</span>
       <div class="chat_list" v-for="chat in chats" :key="chat.id" v-bind:class="{active_chat: activeChatId === chat.id}" >
         <nuxt-link v-bind:to="'/chats/'+chat.id">
           <div class="chat_people">
@@ -50,6 +53,15 @@
     props: ['activeChatId'],
 
     computed: {
+      user() {
+        return this.$auth.$state.user.details
+      },
+      statuses() {
+        return this.$store.state.general.meta.statuses
+      },
+      myStatus() {
+        return this.$store.state.chats.chats.length ? this.$store.state.chats.chats[0].me.chatStatus : 'online'
+      },
       statuses() {
         return this.$store.state.general.meta.statuses
       },
@@ -89,6 +101,23 @@
           }
         }
       }
-    }
+    },
+
+    methods: {
+      async logout() {
+        await this.$auth.logout()
+        window.location.reload()
+      },
+      changeStatus(event) {
+        this.channel.emit('setChatStatus', event.target.value)
+        this.$store.commit('chats/setMyStatus', event.target.value)
+      },
+    },
+
+    mounted() {
+      if(process.browser) {
+        this.channel = this.$adonisWs.userChannel
+      }
+    },
   }
 </script>
