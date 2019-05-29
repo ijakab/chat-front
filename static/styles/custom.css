@@ -164,3 +164,13 @@ img{ max-width:100%;}
   color: yellow;
   background: yellow;
 }
+.incoming_msg_img .displayName{
+  text-decoration: none;
+  color: black;
+}
+.incoming_msg_img .displayName:hover{
+  text-decoration: underline;
+}
+.incoming_msg_img .user-item{
+  display: inline-block;
+}

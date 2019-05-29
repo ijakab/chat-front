@@ -94,6 +94,7 @@ export const actions = {
   },
   async loadMore({commit, state}, chatOrId) {
     let chat = typeof chatOrId === 'number' ? state.chats.find(chat => chat.id === chatOrId) : chatOrId
+    if(!chat.messages) return true
     let oldestMessageId = chat.messages[0].id
     let messages = await this.$socketRequestService.post(`messages/${chat.id}/filter?lastId=${oldestMessageId}`)
     commit('addMessagesToChat', {chat, messages})
