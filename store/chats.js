@@ -1,4 +1,4 @@
-import {keyBy} from 'lodash'
+import keyBy from 'lodash/keyBy'
 
 export const state = () => ({
   chats: [],
@@ -79,6 +79,11 @@ export const mutations = {
     let chat = state.chats.find(chat => chat.id === data.chatId)
     let message = chat.messages.find(message => message.id === data.message.id)
     Object.assign(message, data.message)
+  },
+  updateChat(state, newChat) {
+    newChat.users = keyBy(newChat.users, user => user.id)
+    let existingChat = state.chats.find(chat => chat.id === newChat.id)
+    Object.assign(existingChat, newChat)
   }
 };
 

@@ -58,6 +58,10 @@ const adonisWs = function (Vue) {
         adonisWs.userChannel.on('messageUpdated', data => {
           store.commit('chats/updateMessage', data)
         })
+  
+        adonisWs.userChannel.on('chatUpdated', data => {
+          store.commit('chats/updateChat', data)
+        })
         
         store.commit('general/setReady')
         resolve()
