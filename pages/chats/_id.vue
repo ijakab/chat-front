@@ -1,10 +1,11 @@
 <template>
   <div class="inbox_msg">
+    <update-chat :chat="chat"></update-chat>
     <chat-list v-bind:activeChatId="chatId"></chat-list>
     <div class="mesgs">
       <div class="chat-header clearfix">
         <h4 class="chat-title float-left">{{chat.displayName}}</h4>
-        <p class="info-btn float-right">ⓘ</p>
+        <p class="info-btn float-right" data-toggle="modal" data-target="#updateChatModal" v-if="chat.me.admin">ⓘ</p>
       </div>
       <message-list :chatId="chatId"></message-list>
       <add-message :chatId="chatId"></add-message>
@@ -16,12 +17,14 @@
   import ChatList from '~/components/ChatList'
   import AddMessage from '~/components/AddMessage'
   import MessageList from '~/components/MessageList'
+  import UpdateChat from '~/components/Modals/UpdateChat'
 
   export default {
     components: {
       ChatList,
       AddMessage,
-      MessageList
+      MessageList,
+      UpdateChat
     },
 
     middleware: ['auth'],
