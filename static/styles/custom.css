@@ -66,8 +66,8 @@ img{ max-width:100%;}
   margin-bottom: 10px;
 }
 .incoming_msg_img img {
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   margin-right: 10px;
 }
 .received_msg {
@@ -89,7 +89,6 @@ img{ max-width:100%;}
   color: #747474;
   display: block;
   font-size: 12px;
-  margin: 8px 0 0;
 }
 .received_withd_msg { width: 57%;}
 .mesgs {
