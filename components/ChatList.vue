@@ -62,9 +62,6 @@
       myStatus() {
         return this.$store.state.chats.chats.length ? this.$store.state.chats.chats[0].me.chatStatus : 'online'
       },
-      statuses() {
-        return this.$store.state.general.meta.statuses
-      },
       chats() {
         return this.$store.state.chats.chats
       },
@@ -106,6 +103,7 @@
     methods: {
       async logout() {
         await this.$auth.logout()
+        window.location.href = '/'
         window.location.reload()
       },
       changeStatus(event) {
