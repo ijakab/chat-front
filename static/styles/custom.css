@@ -65,6 +65,11 @@ img{ max-width:100%;}
   align-items: center;
   margin-bottom: 10px;
 }
+.incoming_msg_img img {
+  width: 40px;
+  height: 40px;
+  margin-right: 10px;
+}
 .received_msg {
   display: inline-block;
   padding: 0 0 0 10px;
