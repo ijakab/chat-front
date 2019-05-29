@@ -17,25 +17,27 @@
 
     <create-chat></create-chat>
 
-    <div class="inbox_chat">
-      <span data-toggle="modal" data-target="#exampleModal" class="new-chat-button">+</span>
-      <div class="chat_list" v-for="chat in chats" :key="chat.id" v-bind:class="{active_chat: activeChatId === chat.id}" >
-        <nuxt-link v-bind:to="'/chats/'+chat.id">
-          <div class="chat_people">
-            <div class="chat_img">
-              <img :src="profilePic" :alt="chat.displayName" v-for="profilePic in chat.profilePics">
-              <span class="badge badge-pill chat_status" :class="statusColor(chat)+'-status'">j</span>
+    <div style="position: relative">
+      <div class="inbox_chat">
+        <span data-toggle="modal" data-target="#exampleModal" class="new-chat-button">+</span>
+        <div class="chat_list" v-for="chat in chats" :key="chat.id" v-bind:class="{active_chat: activeChatId === chat.id}" >
+          <nuxt-link v-bind:to="'/chats/'+chat.id">
+            <div class="chat_people">
+              <div class="chat_img">
+                <img :src="profilePic" :alt="chat.displayName" v-for="profilePic in chat.profilePics">
+                <span class="badge badge-pill chat_status" :class="statusColor(chat)+'-status'">j</span>
+              </div>
+              <div class="chat_ib">
+                <h5>{{chat.displayName}}
+                  <span class="chat_date">{{lastMessageAt(chat)}}</span>
+                  <br>
+                  <span class="badge badge-danger" v-if="chat.me.unread">{{chat.me.unread}}</span>
+                </h5>
+                <p>{{lastMessageDisplay(chat.lastMessage)}}.</p>
+              </div>
             </div>
-            <div class="chat_ib">
-              <h5>{{chat.displayName}}
-                <span class="chat_date">{{lastMessageAt(chat)}}</span>
-                <br>
-                <span class="badge badge-danger" v-if="chat.me.unread">{{chat.me.unread}}</span>
-              </h5>
-              <p>{{lastMessageDisplay(chat.lastMessage)}}.</p>
-            </div>
-          </div>
-        </nuxt-link>
+          </nuxt-link>
+        </div>
       </div>
     </div>
 

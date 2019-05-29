@@ -75,8 +75,8 @@
 
       updateChat() {
         let userIds = this.selectedUsers.map(user => user.id)
-        console.log(userIds)
         this.$adonisWs.userChannel.emit('updateChat', {
+          chatId: this.chat.id,
           userIds,
           title: this.title
         })
