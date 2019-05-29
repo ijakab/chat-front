@@ -133,3 +133,34 @@ img{ max-width:100%;}
   height: 516px;
   overflow-y: auto;
 }
+.chat_img {
+  align-items: center;
+  background-color: rgba(0, 0, 0, .05);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+}
+.chat_status {
+  position: absolute;
+  z-index: 9;
+  right: 0;
+  bottom: 0;
+}
+.green-status {
+  color: green;
+  background: green;
+}
+.gray-status {
+  color: gray;
+  background: gray;
+}
+.red-status {
+  color: red;
+  background: red;
+}
+.yellow-status {
+  color: yellow;
+  background: yellow;
+}

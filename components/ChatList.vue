@@ -19,12 +19,17 @@
       <div class="chat_list" v-for="chat in chats" :key="chat.id" v-bind:class="{active_chat: activeChatId === chat.id}" >
         <nuxt-link v-bind:to="'/chats/'+chat.id">
           <div class="chat_people">
-            <div class="chat_img" v-for="profilePic in chat.profilePics"> <img :src="profilePic" :alt="chat.displayName"> </div>
+            <div class="chat_img">
+              <img :src="profilePic" :alt="chat.displayName" v-for="profilePic in chat.profilePics">
+              <span class="badge badge-pill chat_status" :class="statusColor(chat)+'-status'">j</span>
+            </div>
             <div class="chat_ib">
-              <h5>{{chat.displayName}} <span class="chat_date">{{lastMessageAt(chat)}}</span></h5>
+              <h5>{{chat.displayName}}
+                <span class="chat_date">{{lastMessageAt(chat)}}</span>
+                <br>
+                <span class="badge badge-danger" v-if="chat.me.unread">{{chat.me.unread}}</span>
+              </h5>
               <p>{{lastMessageDisplay(chat.lastMessage)}}.</p>
-              <p>{{chat.me.unread}}</p>
-              <span class="badge badge-pill" :class="statusColor(chat)+'-status'">j</span>
             </div>
           </div>
         </nuxt-link>
@@ -33,25 +38,6 @@
 
   </div>
 </template>
-
-<style>
-  .green-status {
-    color: green;
-    background: green;
-  }
-  .gray-status {
-    color: gray;
-    background: gray;
-  }
-  .red-status {
-    color: red;
-    background: red;
-  }
-  .yellow-status {
-    color: yellow;
-    background: yellow;
-  }
-</style>
 
 <script>
   import CreateChat from '~/components/Modals/CreateChat'

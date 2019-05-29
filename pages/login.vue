@@ -1,6 +1,5 @@
 <template>
   <form v-on:submit.prevent="login()">
-    Test test
     <div class="form-group">
       <label for="exampleInputEmail1">Email address</label>
       <input type="text" v-model="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
