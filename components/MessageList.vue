@@ -25,7 +25,6 @@
 
             <div class="msg_actions" v-if="isMine(message)">
               <span v-on:click="deleteMessage(message)">X</span>
-              <span>Y</span>
             </div>
 
             <p>{{message.body}}</p>
