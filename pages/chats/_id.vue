@@ -20,6 +20,8 @@
       MessageList
     },
 
+    middleware: ['auth'],
+
     mounted() {
       if(process.browser) {
         this.subscription = this.$adonisWs.subscribe(`chat:${this.chatId}`)
