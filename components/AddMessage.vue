@@ -3,7 +3,7 @@
     <div class="input_msg_write">
       <form v-on:submit.prevent="sendMessage">
         <input type="text" v-model="currentMessage" class="write_msg" id="exampleInputEmail1" placeholder="Text something here" @keydown="startTyping" @keyup="stopTyping" />
-        <button class="msg_send_btn" type="button">➤</button>
+        <button class="msg_send_btn" type="button" @click="sendMessage">➤</button>
       </form>
     </div>
   </div>
