@@ -1,6 +1,7 @@
 export const state = () => ({
   isLoaded: false,
-  meta: {}
+  meta: {},
+  scrollCounter: 0
 });
 
 export const mutations = {
@@ -9,6 +10,9 @@ export const mutations = {
   },
   setMeta(state, meta) {
     state.meta = meta
+  },
+  scroll(state) {
+    state.scrollCounter++
   }
 };
 

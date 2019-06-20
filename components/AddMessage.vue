@@ -29,7 +29,6 @@
           body: this.currentMessage
         })
         this.currentMessage = ''
-        this.$nuxt.$emit('scrollDownAuto')
       },
       startTyping() {
         if (this.typing) return

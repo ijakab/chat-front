@@ -41,6 +41,7 @@ const adonisWs = function (Vue) {
         adonisWs.userChannel.on('messageCreated', data => {
           store.commit('chats/putToTop', data.chat_id)
           store.commit('chats/addMessageFromSocket', data)
+          store.commit('general/scroll')
         })
         
         adonisWs.userChannel.on('userSeen', data => {

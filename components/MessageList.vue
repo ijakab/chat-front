@@ -61,6 +61,9 @@
     props: ['chatId'],
 
     computed: {
+      scrollCounter() {
+        return this.$store.state.general.scrollCounter
+      },
       chat() {
         return this.$store.state.chats.chats.find(chat => chat.id === this.chatId)
       },
@@ -103,7 +106,7 @@
       },
       scrollToBottom() {
         this.$nextTick(() => {
-          this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
+            if(this.$refs.messages) this.$refs.messages.scrollTop = this.$refs.messages.scrollHeight
         })
       },
       deleteMessage(message) {
@@ -111,13 +114,16 @@
       }
     },
 
+    watch: {
+      scrollCounter() {
+        this.scrollToBottom()
+      }
+    },
+
     mounted() {
       if(process.browser) {
         this.channel = this.$adonisWs.userChannel
         this.scrollToBottom()
-        this.$nuxt.$on('scrollDownAuto', () => {
-          this.scrollToBottom()
-        })
       }
     },
   }
