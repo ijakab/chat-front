@@ -81,11 +81,7 @@ module.exports = {
             propertyName: 'data.tokens.accessToken'
           },
           logout: false,
-          user: {
-            url: env.env.apiBaseUrl + '/api/v1/user/profile',
-            method: 'get',
-            propertyName: 'data'
-          },
+          user: false,
           refresh: {
             url: env.env.apiBaseUrl + '/api/v1/refresh',
             method: 'get',
