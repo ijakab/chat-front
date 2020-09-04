@@ -19,7 +19,7 @@
     "cross-env": "^5.2.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.11",
-    "node-sass": "^4.11.0",
+    "node-sass": "^4.13.1",
     "nuxt": "^2.4.0",
     "sass-loader": "^7.1.0",
     "sweetalert2": "^8.2.6",
